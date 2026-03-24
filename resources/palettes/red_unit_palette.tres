@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c4bqjxphpe41x"]
+
+[ext_resource type="Shader" uid="uid://bo2kw8gfjdo53" path="res://resources/shaders/unit_palette_swap.gdshader" id="1_yi0qk"]
+
+[resource]
+shader = ExtResource("1_yi0qk")
+shader_parameter/original_main_color = Color(0.5176471, 0.7764706, 0.4117647, 1)
+shader_parameter/original_shaded_color = Color(0.2627451, 0.58431375, 0.27058825, 1)
+shader_parameter/original_highlight_color = Color(0.6666667, 0.8901961, 0.5764706, 1)
+shader_parameter/original_outline_color = Color(0.24705882, 0.14901961, 0.19215687, 1)
+shader_parameter/new_main_color = Color(0.6431373, 0, 0, 1)
+shader_parameter/new_shaded_color = Color(0.41960785, 0, 0, 1)
+shader_parameter/new_highlight_color = Color(0.9882353, 0, 0, 1)
+shader_parameter/new_outline_color = Color(0.34253055, 0.36222902, 0.42692357, 1)
+shader_parameter/show_outline = false
