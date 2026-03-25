@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cppkswf18q6ia"
-path="res://.godot/imported/isotile-32x32.png-3666999b5dec47cdbf1ece4f33f39bae.ctex"
+uid="uid://dl23h32jo1r70"
+path="res://.godot/imported/small_box_all_top.png-e9bf772c9525a0bcfe4bc1ac5878da39.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/map/isotile-32x32.png"
-dest_files=["res://.godot/imported/isotile-32x32.png-3666999b5dec47cdbf1ece4f33f39bae.ctex"]
+source_file="res://assets/map/small_box_all_top.png"
+dest_files=["res://.godot/imported/small_box_all_top.png-e9bf772c9525a0bcfe4bc1ac5878da39.ctex"]
 
 [params]
 

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="UnitCore" format=3 uid="uid://uthg86ynn52t"]
+
+[ext_resource type="Script" uid="uid://drgwcdoqoi2xc" path="res://core_scripts/unit_core.gd" id="1_qo62i"]
+[ext_resource type="Texture2D" uid="uid://dn11rxpcbrm3d" path="res://assets/units/rifle_man.png" id="2_0gg6w"]
+
+[resource]
+script = ExtResource("1_qo62i")
+texture = ExtResource("2_0gg6w")
+metadata/_custom_type_script = "uid://drgwcdoqoi2xc"

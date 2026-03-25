@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://du8arg3knhen5"]
+
+[ext_resource type="PackedScene" uid="uid://h5ua7mkblwyn" path="res://nodes/cell/cell.tscn" id="1_cmp3d"]
+[ext_resource type="PackedScene" uid="uid://ba5a321eieypp" path="res://nodes/unit/unit.tscn" id="2_tp5e2"]
+[ext_resource type="Resource" uid="uid://uthg86ynn52t" path="res://resources/units/rifle_man.tres" id="3_68k2g"]
+[ext_resource type="Resource" uid="uid://d2xjfw2do4ryi" path="res://resources/players/first_player.tres" id="4_6hskn"]
+
+[sub_resource type="GDScript" id="GDScript_68k2g"]
+script/source = "extends Node2D
+
+func _ready() -> void:
+  $Unit.position = $Cell.position
+"
+
+[node name="TestingUnits" type="Node2D" unique_id=556972192]
+script = SubResource("GDScript_68k2g")
+
+[node name="Cell" parent="." unique_id=1574186983 instance=ExtResource("1_cmp3d")]
+position = Vector2(290, 170)
+
+[node name="Unit" parent="." unique_id=316297137 instance=ExtResource("2_tp5e2")]
+position = Vector2(232, 158)
+core = ExtResource("3_68k2g")
+player = ExtResource("4_6hskn")

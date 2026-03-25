@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="UnitCore" format=3 uid="uid://cl3w4p2cvtn3s"]
+
+[ext_resource type="Script" uid="uid://drgwcdoqoi2xc" path="res://core_scripts/unit_core.gd" id="1_skdli"]
+[ext_resource type="Texture2D" uid="uid://d0fhbr5ttjr3f" path="res://assets/units/tank.png" id="2_xsf5n"]
+
+[resource]
+script = ExtResource("1_skdli")
+texture = ExtResource("2_xsf5n")
+metadata/_custom_type_script = "uid://drgwcdoqoi2xc"

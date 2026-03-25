@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Player" format=3 uid="uid://d2xjfw2do4ryi"]
+
+[ext_resource type="Script" uid="uid://bses42qqc1aer" path="res://core_scripts/player.gd" id="1_p2dld"]
+[ext_resource type="Material" path="res://resources/palettes/yellow_unit_palette.tres" id="1_tcat4"]
+
+[resource]
+script = ExtResource("1_p2dld")
+palette = ExtResource("1_tcat4")
+metadata/_custom_type_script = "uid://bses42qqc1aer"
