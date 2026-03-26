@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bxv0ntbyhlhiq"]
+
+[ext_resource type="Texture2D" uid="uid://r4gfoo4nf52s" path="res://assets/map/small-top.png" id="1_fxjw1"]
+
+[node name="CellRegionHighlight" type="Sprite2D" unique_id=876725271]
+modulate = Color(0.47058824, 1, 0.59607846, 0.63529414)
+texture = ExtResource("1_fxjw1")

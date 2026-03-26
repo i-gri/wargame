@@ -4,12 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://ba5a321eieypp" path="res://nodes/unit/unit.tscn" id="2_tp5e2"]
 [ext_resource type="Resource" uid="uid://uthg86ynn52t" path="res://resources/units/rifle_man.tres" id="3_68k2g"]
 [ext_resource type="Resource" uid="uid://d2xjfw2do4ryi" path="res://resources/players/first_player.tres" id="4_6hskn"]
+[ext_resource type="Script" uid="uid://b68fp3qqof0rn" path="res://nodes/managers/unit_manager.gd" id="5_6hskn"]
 
 [sub_resource type="GDScript" id="GDScript_68k2g"]
 script/source = "extends Node2D
 
 func _ready() -> void:
-  $Unit.position = $Cell.position
+  pass
+  #$Unit.position = $Cell.position
 "
 
 [node name="TestingUnits" type="Node2D" unique_id=556972192]
@@ -18,7 +20,33 @@ script = SubResource("GDScript_68k2g")
 [node name="Cell" parent="." unique_id=1574186983 instance=ExtResource("1_cmp3d")]
 position = Vector2(290, 170)
 
+[node name="Cell2" parent="." unique_id=377588126 instance=ExtResource("1_cmp3d")]
+position = Vector2(250, 190)
+
 [node name="Unit" parent="." unique_id=316297137 instance=ExtResource("2_tp5e2")]
-position = Vector2(232, 158)
+position = Vector2(249, 202)
 core = ExtResource("3_68k2g")
 player = ExtResource("4_6hskn")
+
+[node name="Unit2" parent="." unique_id=1297926918 instance=ExtResource("2_tp5e2")]
+position = Vector2(230, 194)
+core = ExtResource("3_68k2g")
+player = ExtResource("4_6hskn")
+
+[node name="Unit3" parent="." unique_id=1745569048 instance=ExtResource("2_tp5e2")]
+position = Vector2(240, 199)
+core = ExtResource("3_68k2g")
+player = ExtResource("4_6hskn")
+
+[node name="Unit4" parent="." unique_id=804388135 instance=ExtResource("2_tp5e2")]
+position = Vector2(221, 189)
+core = ExtResource("3_68k2g")
+player = ExtResource("4_6hskn")
+
+[node name="Unit5" parent="." unique_id=1749678567 instance=ExtResource("2_tp5e2")]
+position = Vector2(216, 139)
+core = ExtResource("3_68k2g")
+player = ExtResource("4_6hskn")
+
+[node name="UnitManager" type="Node" parent="." unique_id=738032534]
+script = ExtResource("5_6hskn")

@@ -6,22 +6,20 @@
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_rys0y"]
 points = PackedVector2Array(0, -19, 38, 0, 0, 18, -37, -1)
 
-[node name="Cell" type="Node2D" unique_id=1574186983]
+[node name="Cell" type="Area2D" unique_id=377588126]
+collision_mask = 2
 script = ExtResource("1_rys0y")
 
 [node name="Tile" type="Sprite2D" parent="." unique_id=1242666551]
 position = Vector2(0, 1)
 texture = ExtResource("1_lrffu")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=377588126]
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2109052850]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2109052850]
+visible = false
 shape = SubResource("ConvexPolygonShape2D_rys0y")
 debug_color = Color(0.6325221, 0.52744573, 0.10307399, 0.41960785)
 
 [node name="DebugLabels" type="Node2D" parent="." unique_id=2135058443]
-visible = false
 
 [node name="Label" type="Label" parent="DebugLabels" unique_id=271953673]
 offset_left = -33.0
@@ -239,5 +237,6 @@ theme_override_font_sizes/font_size = 3
 text = "0,1"
 horizontal_alignment = 1
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_exited"]
+[node name="Marker2D" type="Marker2D" parent="." unique_id=665334199]
+
+[node name="Highlights" type="CanvasGroup" parent="." unique_id=924882235]

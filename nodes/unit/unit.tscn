@@ -2,20 +2,27 @@
 
 [ext_resource type="Texture2D" uid="uid://dn11rxpcbrm3d" path="res://assets/units/rifle_man.png" id="1_da350"]
 [ext_resource type="Script" uid="uid://cq75j87fvhnan" path="res://nodes/unit/unit.gd" id="1_sgaal"]
+[ext_resource type="Script" uid="uid://crmnw3ldr3xev" path="res://addons/drag_and_drop/scripts/draggable.gd" id="3_elvbn"]
+[ext_resource type="Script" uid="uid://djdmnemxrx7bg" path="res://addons/drag_and_drop/resources/draggable_types/draggable_type.gd" id="4_a4ba6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sgaal"]
 radius = 4.0
 
-[node name="Unit" type="Node2D" unique_id=316297137]
+[sub_resource type="Resource" id="Resource_elvbn"]
+script = ExtResource("4_a4ba6")
+
+[node name="Unit" type="Area2D" unique_id=1297926918]
 script = ExtResource("1_sgaal")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1201242619]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_da350")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1466203646]
-collision_layer = 2
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1044113297]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1044113297]
 shape = SubResource("CircleShape2D_sgaal")
+
+[node name="Draggable" type="Node" parent="." unique_id=1872436795]
+script = ExtResource("3_elvbn")
+drag_input_name = &"select"
+type = SubResource("Resource_elvbn")
+metadata/_custom_type_script = "uid://crmnw3ldr3xev"
