@@ -1,7 +1,8 @@
 class_name Cell extends Area2D
 
 const CELL_SIZE = Vector2(20,20)
-const COORD_OFFSET = Vector2(-30,-1)
+const COORD_OFFSET = Vector2(-30,0)
+const UNIT_OFFSET = Vector2(0,-1) # Not used currently
 const HIGHLIGHT_SEGMENT_ID = "uid://bxv0ntbyhlhiq"
 
 const ALLOWED_TILES:Dictionary[Vector2i, Array] = {
@@ -18,8 +19,8 @@ var occupied_tiles:Dictionary[Vector2i, Unit] = {}
 
 
 func _ready():
-  prepare_invasion(Vector2i(0,1))
-
+  pass
+  
 
 func calculate_tile_to_position( tile:Vector2i ) -> Vector2:
   return tile.x * Vector2(1,.5) * CELL_SIZE.x/2 + tile.y * Vector2(-1,.5) * CELL_SIZE.y/2 + COORD_OFFSET
@@ -44,7 +45,7 @@ func calculate_position_to_tile( unit_position:Vector2 ) -> Vector2i:
 
 
 
-func prepare_invasion( entry_point:Vector2i ) -> void:
+func add_dropzone( snap_positions:Array[Vector2] ) -> void:
   var dropzone:DropZone = DropZone.new()
   dropzone.attach_spot = self
   dropzone.drop_behavior = DropBehaviorReject.new()
@@ -52,10 +53,10 @@ func prepare_invasion( entry_point:Vector2i ) -> void:
 
   dropzone.drop_applied.connect( _on_unit_entered )
 
-  for space:Vector2i in get_available_spaces( entry_point ):
+  for snap_position:Vector2i in snap_positions:
     var mark:Marker2D = Marker2D.new()
     var sprite:Sprite2D = load(HIGHLIGHT_SEGMENT_ID).instantiate()
-    var segment_position = calculate_tile_to_position( space )
+    var segment_position = snap_position # calculate_tile_to_position( space )
 
     sprite.position = segment_position
     mark.position = segment_position
@@ -76,8 +77,21 @@ func get_available_spaces( entry_point:Vector2i ) -> Array[Vector2i]:
   return available
 
 
-func _on_unit_entered( _dropzone:DropZone, unit:Area2D, _plan: ) -> void:
+func _on_unit_entered( _dropzone:DropZone, unit:Area2D, _plan:DropPlan ) -> void:
   print_debug("entered")
 
   var tile = calculate_position_to_tile( unit.position )
+  add_unit( unit, tile)
+
+
+func add_unit( unit:Unit, tile:Vector2i ) -> void:
   occupied_tiles[tile] = unit
+
+
+func get_all_segments() -> Array[Vector2i]:
+  var result:Array[Vector2i] = []
+  for x in 4:
+    for y in 4:
+      result.append( Vector2i( x,y * -1 ))
+
+  return result

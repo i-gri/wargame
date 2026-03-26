@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://du8arg3knhen5"]
 
+[ext_resource type="Script" uid="uid://drgwcdoqoi2xc" path="res://core_scripts/unit_core.gd" id="1_6ob4c"]
 [ext_resource type="PackedScene" uid="uid://h5ua7mkblwyn" path="res://nodes/cell/cell.tscn" id="1_cmp3d"]
+[ext_resource type="Resource" uid="uid://cl3w4p2cvtn3s" path="res://resources/units/tank.tres" id="2_qav1g"]
 [ext_resource type="PackedScene" uid="uid://ba5a321eieypp" path="res://nodes/unit/unit.tscn" id="2_tp5e2"]
 [ext_resource type="Resource" uid="uid://uthg86ynn52t" path="res://resources/units/rifle_man.tres" id="3_68k2g"]
 [ext_resource type="Resource" uid="uid://d2xjfw2do4ryi" path="res://resources/players/first_player.tres" id="4_6hskn"]
@@ -9,13 +11,21 @@
 [sub_resource type="GDScript" id="GDScript_68k2g"]
 script/source = "extends Node2D
 
+@export var units:Array[UnitCore]
+@export var player:Player
+
 func _ready() -> void:
   pass
+  print_debug( \"all the segmetns: \", $Cell.get_all_segments() )
   #$Unit.position = $Cell.position
+  
+  $UnitManager.deploy_in_cell( $Cell, units, player )
 "
 
 [node name="TestingUnits" type="Node2D" unique_id=556972192]
 script = SubResource("GDScript_68k2g")
+units = Array[ExtResource("1_6ob4c")]([ExtResource("2_qav1g"), ExtResource("3_68k2g"), ExtResource("3_68k2g")])
+player = ExtResource("4_6hskn")
 
 [node name="Cell" parent="." unique_id=1574186983 instance=ExtResource("1_cmp3d")]
 position = Vector2(290, 170)
