@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dh41pdb3p85fk"
-path="res://.godot/imported/big_tile_to_outline.png-121256fa00ad179c1165fea180d8e5e7.ctex"
+uid="uid://x3vi2tumr68c"
+path="res://.godot/imported/big-tile-outline.png-65ab598dcecbb5e3b9c6af7e047a9c73.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/map/big_tile_to_outline.png"
-dest_files=["res://.godot/imported/big_tile_to_outline.png-121256fa00ad179c1165fea180d8e5e7.ctex"]
+source_file="res://assets/map/big-tile-outline.png"
+dest_files=["res://.godot/imported/big-tile-outline.png-65ab598dcecbb5e3b9c6af7e047a9c73.ctex"]
 
 [params]
 

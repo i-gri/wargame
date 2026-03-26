@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dc1p5idqxq1pp"
-path="res://.godot/imported/big_tile_to_inside.png-505c39981e14db4ca649603cf01eb23f.ctex"
+uid="uid://ciha08hqv8t02"
+path="res://.godot/imported/big-tilel-top.png-0f91f8df4fa91de295c0279eaf1ba2c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/map/big_tile_to_inside.png"
-dest_files=["res://.godot/imported/big_tile_to_inside.png-505c39981e14db4ca649603cf01eb23f.ctex"]
+source_file="res://assets/map/big-tilel-top.png"
+dest_files=["res://.godot/imported/big-tilel-top.png-0f91f8df4fa91de295c0279eaf1ba2c6.ctex"]
 
 [params]
 

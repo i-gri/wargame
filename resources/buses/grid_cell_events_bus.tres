@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="CellEventsBus" format=3 uid="uid://ci3vbnoug7tl8"]
+
+[ext_resource type="Script" uid="uid://cfkcwfwncc16d" path="res://scripts/buses/cell_events_bus.gd" id="1_cgbhj"]
+
+[resource]
+script = ExtResource("1_cgbhj")
+metadata/_custom_type_script = "uid://cfkcwfwncc16d"

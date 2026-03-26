@@ -12,10 +12,12 @@ const ALLOWED_TILES:Dictionary[Vector2i, Array] = {
   Vector2i(-1,0): [Vector2i(0,0), Vector2i(0,-1), Vector2i(0,-2), Vector2i(0,-3)],
 }
 
-
-var occupied_tiles:Dictionary[Vector2i, Unit] = {}
+@export var events_bus:CellEventsBus
 
 @onready var highlights:CanvasGroup = $Highlights
+@onready var outline:Sprite2D = $Outline
+
+var occupied_tiles:Dictionary[Vector2i, Unit] = {}
 
 
 func _ready():
@@ -95,3 +97,19 @@ func get_all_segments() -> Array[Vector2i]:
       result.append( Vector2i( x,y * -1 ))
 
   return result
+
+
+func show_outline() -> void:
+  outline.visible = true
+
+
+func hide_outline() -> void:
+  outline.visible = false
+
+
+func _on_mouse_entered() -> void:
+  events_bus.mouse_entered.emit( self )
+
+func _on_mouse_exited() -> void:
+  events_bus.mouse_exited.emit( self )
+

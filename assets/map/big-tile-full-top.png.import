@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3r0tnx08ak2w"
-path="res://.godot/imported/big_tile_top_full.png-5207bd2480d310166efbe45308ae72a2.ctex"
+uid="uid://clobgsa53kdww"
+path="res://.godot/imported/big-tile-full-top.png-aadaea21f2fc78fcbec90e7badb3d87e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/map/big_tile_top_full.png"
-dest_files=["res://.godot/imported/big_tile_top_full.png-5207bd2480d310166efbe45308ae72a2.ctex"]
+source_file="res://assets/map/big-tile-full-top.png"
+dest_files=["res://.godot/imported/big-tile-full-top.png-aadaea21f2fc78fcbec90e7badb3d87e.ctex"]
 
 [params]
 
