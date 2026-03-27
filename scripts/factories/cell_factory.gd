@@ -1,4 +1,4 @@
-class_name CellFactory extends Node
+class_name CellFactory
 
 const SCENE_PATH:String = "uid://h5ua7mkblwyn"
 

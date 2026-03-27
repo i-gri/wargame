@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://h5ua7mkblwyn"]
 
-[ext_resource type="Texture2D" uid="uid://kmhcjvhocn0l" path="res://assets/map/big-box-with-grid.png" id="1_lrffu"]
 [ext_resource type="Script" uid="uid://dswiceliylq6l" path="res://nodes/cell/cell.gd" id="1_rys0y"]
 [ext_resource type="Resource" uid="uid://ci3vbnoug7tl8" path="res://resources/buses/grid_cell_events_bus.tres" id="2_rqyxa"]
 [ext_resource type="Texture2D" uid="uid://x3vi2tumr68c" path="res://assets/map/big-tile-outline.png" id="4_42gkb"]
+[ext_resource type="Texture2D" uid="uid://ciha08hqv8t02" path="res://assets/map/big-tilel-top.png" id="4_y14ii"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_rys0y"]
 points = PackedVector2Array(0, -19, 38, 0, 0, 18, -37, -1)
@@ -13,13 +13,19 @@ collision_mask = 2
 script = ExtResource("1_rys0y")
 events_bus = ExtResource("2_rqyxa")
 
-[node name="Tile" type="Sprite2D" parent="." unique_id=1242666551]
+[node name="Overlay" type="Sprite2D" parent="." unique_id=1242666551]
 visible = false
+modulate = Color(1, 0.84705883, 0.7372549, 1)
 position = Vector2(0, 1)
-texture = ExtResource("1_lrffu")
+texture = ExtResource("4_y14ii")
+
+[node name="Outline" type="Sprite2D" parent="." unique_id=1559603524]
+visible = false
+modulate = Color(0.19291574, 0.69759834, 0.5990225, 1)
+position = Vector2(0, 1)
+texture = ExtResource("4_42gkb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2109052850]
-visible = false
 shape = SubResource("ConvexPolygonShape2D_rys0y")
 debug_color = Color(0.6325221, 0.52744573, 0.10307399, 0.41960785)
 
@@ -267,12 +273,6 @@ text = "0,1"
 horizontal_alignment = 1
 
 [node name="Highlights" type="CanvasGroup" parent="." unique_id=924882235]
-
-[node name="Outline" type="Sprite2D" parent="." unique_id=1559603524]
-visible = false
-modulate = Color(0.19291574, 0.69759834, 0.5990225, 1)
-position = Vector2(0, 1)
-texture = ExtResource("4_42gkb")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

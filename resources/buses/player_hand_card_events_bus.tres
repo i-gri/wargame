@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="CardEventsBus" format=3 uid="uid://c084dwlsjo3eo"]
+
+[ext_resource type="Script" uid="uid://de53bqstua44o" path="res://scripts/buses/card_events_bus.gd" id="1_nerb8"]
+
+[resource]
+script = ExtResource("1_nerb8")
+metadata/_custom_type_script = "uid://de53bqstua44o"

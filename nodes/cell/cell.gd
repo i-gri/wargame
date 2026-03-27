@@ -12,23 +12,22 @@ const ALLOWED_TILES:Dictionary[Vector2i, Array] = {
   Vector2i(-1,0): [Vector2i(0,0), Vector2i(0,-1), Vector2i(0,-2), Vector2i(0,-3)],
 }
 
+signal card_played( card:Card )
+
 @export var events_bus:CellEventsBus
 
 @onready var highlights:CanvasGroup = $Highlights
 @onready var outline:Sprite2D = $Outline
+@onready var overlay:Sprite2D = $Overlay
 
 var tile:Vector2i
 
 var dropzone:DropZone
-var occupied_tiles:Dictionary[Vector2i, Unit] = {}
+var occupied_sections:Dictionary[Vector2i, Unit] = {}
 
 
-func _ready():
-  pass
-  
-
-func calculate_tile_to_position( tile:Vector2i ) -> Vector2:
-  return tile.x * Vector2(1,.5) * CELL_SIZE.x/2 + tile.y * Vector2(-1,.5) * CELL_SIZE.y/2 + COORD_OFFSET
+func calculate_section_to_position( section:Vector2i ) -> Vector2:
+  return section.x * Vector2(1,.5) * CELL_SIZE.x/2 + section.y * Vector2(-1,.5) * CELL_SIZE.y/2 + COORD_OFFSET
 
 
 func calculate_position_to_tile( unit_position:Vector2 ) -> Vector2i:
@@ -51,14 +50,14 @@ func calculate_position_to_tile( unit_position:Vector2 ) -> Vector2i:
 
 
 func add_unit_dropzone( snap_positions:Array[Vector2] ) -> void:
-  dropzone = DraggingFactory.create_dropzone( self )
+  dropzone = DraggingFactory.create_snap_dropzone( self )
 
   dropzone.drop_applied.connect( _on_unit_entered )
 
   for snap_position:Vector2i in snap_positions:
     var mark:Marker2D = Marker2D.new()
     var sprite:Sprite2D = load(HIGHLIGHT_SEGMENT_ID).instantiate()
-    var segment_position = snap_position # calculate_tile_to_position( space )
+    var segment_position = snap_position # calculate_section_to_position( space )
 
     sprite.position = segment_position
     mark.position = segment_position
@@ -69,9 +68,20 @@ func add_unit_dropzone( snap_positions:Array[Vector2] ) -> void:
   add_child( dropzone )
 
 
+func add_card_dropzone() -> void:
+  dropzone = DraggingFactory.create_simple_dropzone( self )
+
+  dropzone.drop_applied.connect( _on_card_played )
+  overlay.visible = true
+
+  add_child( dropzone )
+
 func remove_dropzone() -> void:
   if dropzone == null: return
 
+  overlay.visible = false
+
+  print_debug("in the remove after the if")
   dropzone.queue_free()
   dropzone = null
 
@@ -79,7 +89,7 @@ func remove_dropzone() -> void:
 func get_available_spaces( entry_point:Vector2i ) -> Array[Vector2i]:
   var available:Array[Vector2i] = [] 
   for tile:Vector2i in ALLOWED_TILES[entry_point]:
-    if occupied_tiles.has(tile): continue
+    if occupied_sections.has(tile): continue
 
     available.append( tile )
 
@@ -89,12 +99,16 @@ func get_available_spaces( entry_point:Vector2i ) -> Array[Vector2i]:
 func _on_unit_entered( _dropzone:DropZone, unit:Area2D, _plan:DropPlan ) -> void:
   print_debug("entered")
 
-  var tile = calculate_position_to_tile( unit.position )
-  add_unit( unit, tile)
+  var unit_tile = calculate_position_to_tile( unit.position )
+  add_unit( unit, unit_tile)
 
+
+func _on_card_played( _zone: DropZone, card: Card, _plan: DropPlan ) -> void:
+  events_bus.card_played.emit( self, card )
+  
 
 func add_unit( unit:Unit, tile:Vector2i ) -> void:
-  occupied_tiles[tile] = unit
+  occupied_sections[tile] = unit
 
 
 func get_all_segments() -> Array[Vector2i]:

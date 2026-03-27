@@ -7,10 +7,19 @@ static func create_draggable() -> Draggable:
 
   return node
 
-static func create_dropzone( attach_spot:Area2D ) -> DropZone:
+static func create_snap_dropzone( attach_spot:Area2D ) -> DropZone:
   var dropzone:DropZone = DropZone.new()
   dropzone.attach_spot = attach_spot
   dropzone.drop_behavior = DropBehaviorReject.new()
   dropzone.snap_style = dropzone.SNAP_STYLE.SNAP_MARKERS
+
+  return dropzone
+
+
+static func create_simple_dropzone( attach_spot:Area2D ) -> DropZone:
+  var dropzone:DropZone = DropZone.new()
+  dropzone.attach_spot = attach_spot
+  dropzone.drop_behavior = DropBehaviorReject.new()
+  dropzone.snap_style = dropzone.SNAP_STYLE.NO_SNAP
 
   return dropzone

@@ -1,6 +1,6 @@
 class_name Hand extends Node2D
 
-signal card_selected( card:Card )
+@export var card_events_bus:CardEventsBus
 
 @export var card_width:int = 80
 @export var card_padding:int = 10
@@ -21,9 +21,7 @@ func _ready() -> void:
 
 
 func connect_card( card:Card ) -> void:
-  card.input_event.connect( _on_card_selected.bind( card ) )
   card.draggable.drag_started.connect( _on_card_dragged )
-  card.played.connect( _on_card_played )
 
 func update_card_positions() -> void:
   for i in range( cards.size()):
@@ -43,15 +41,11 @@ func animate_card_to_position( new_position:Vector2, card:Card ) -> void:
   tween.tween_property( card, "position", new_position, .1 )
 
 
-func _on_card_selected( _viewport:Viewport, event:InputEvent, _shape_idx: int, card:Card ) -> void:
-  if not event.is_action_released("select"): return 
-
-  card_selected.emit( card )
-
-
 func _on_card_dragged( card:Card ) -> void:
-  card_selected.emit( card )
+  card_events_bus.card_selected.emit( card )
 
 
-func _on_card_played( card:Card ) -> void:
-  pass
+func card_played( card ) -> void:
+  cards.erase( card )
+  card.queue_free()
+  update_card_positions()
