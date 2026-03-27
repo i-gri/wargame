@@ -17,6 +17,8 @@ const ALLOWED_TILES:Dictionary[Vector2i, Array] = {
 @onready var highlights:CanvasGroup = $Highlights
 @onready var outline:Sprite2D = $Outline
 
+var tile:Vector2i
+
 var dropzone:DropZone
 var occupied_tiles:Dictionary[Vector2i, Unit] = {}
 
