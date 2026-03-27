@@ -17,6 +17,7 @@ const ALLOWED_TILES:Dictionary[Vector2i, Array] = {
 @onready var highlights:CanvasGroup = $Highlights
 @onready var outline:Sprite2D = $Outline
 
+var dropzone:DropZone
 var occupied_tiles:Dictionary[Vector2i, Unit] = {}
 
 
@@ -47,11 +48,8 @@ func calculate_position_to_tile( unit_position:Vector2 ) -> Vector2i:
 
 
 
-func add_dropzone( snap_positions:Array[Vector2] ) -> void:
-  var dropzone:DropZone = DropZone.new()
-  dropzone.attach_spot = self
-  dropzone.drop_behavior = DropBehaviorReject.new()
-  dropzone.snap_style = dropzone.SNAP_STYLE.SNAP_MARKERS
+func add_unit_dropzone( snap_positions:Array[Vector2] ) -> void:
+  dropzone = DraggingFactory.create_dropzone( self )
 
   dropzone.drop_applied.connect( _on_unit_entered )
 
@@ -67,6 +65,13 @@ func add_dropzone( snap_positions:Array[Vector2] ) -> void:
     dropzone.add_child( mark )
 
   add_child( dropzone )
+
+
+func remove_dropzone() -> void:
+  if dropzone == null: return
+
+  dropzone.queue_free()
+  dropzone = null
 
 
 func get_available_spaces( entry_point:Vector2i ) -> Array[Vector2i]:
