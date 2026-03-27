@@ -12,8 +12,6 @@ const ALLOWED_TILES:Dictionary[Vector2i, Array] = {
   Vector2i(-1,0): [Vector2i(0,0), Vector2i(0,-1), Vector2i(0,-2), Vector2i(0,-3)],
 }
 
-signal card_played( card:Card )
-
 @export var events_bus:CellEventsBus
 
 @onready var highlights:CanvasGroup = $Highlights
@@ -21,6 +19,7 @@ signal card_played( card:Card )
 @onready var overlay:Sprite2D = $Overlay
 
 var tile:Vector2i
+var core:CellCore
 
 var dropzone:DropZone
 var occupied_sections:Dictionary[Vector2i, Unit] = {}
@@ -88,10 +87,10 @@ func remove_dropzone() -> void:
 
 func get_available_spaces( entry_point:Vector2i ) -> Array[Vector2i]:
   var available:Array[Vector2i] = [] 
-  for tile:Vector2i in ALLOWED_TILES[entry_point]:
-    if occupied_sections.has(tile): continue
+  for segment:Vector2i in ALLOWED_TILES[entry_point]:
+    if occupied_sections.has(segment): continue
 
-    available.append( tile )
+    available.append( segment )
 
   return available
 
@@ -107,8 +106,8 @@ func _on_card_played( _zone: DropZone, card: Card, _plan: DropPlan ) -> void:
   events_bus.card_played.emit( self, card )
   
 
-func add_unit( unit:Unit, tile:Vector2i ) -> void:
-  occupied_sections[tile] = unit
+func add_unit( unit:Unit, segment:Vector2i ) -> void:
+  occupied_sections[segment] = unit
 
 
 func get_all_segments() -> Array[Vector2i]:

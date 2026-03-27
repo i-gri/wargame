@@ -10,13 +10,13 @@ func _ready() -> void:
   cell_events_bus.card_played.connect( _on_card_played )
   card_events_bus.card_selected.connect( _on_card_selected )
 
-func setup( tile_map:TileMapLayer ) -> void:
+func setup( tile_map:TileMapLayer, cells_data:Dictionary[Vector2i, CellCore] ) -> void:
   map = tile_map
 
   var factory:CellFactory = CellFactory.new()
 
   for tile:Vector2i in tile_map.get_used_cells():
-    var node:Cell = factory.create( tile, map.map_to_local( tile ))
+    var node:Cell = factory.create( tile, map.map_to_local( tile ), cells_data.get(tile, null))
 
     add_child( node )
     grid[tile] = node
@@ -31,11 +31,16 @@ func get_cell( tile:Vector2i ) -> Cell:
   return grid.get(tile)
 
 
+func get_cells( filter:Callable ) -> Array[Cell]:
+  return grid.values().filter( filter )
+
+
 func _on_card_played( _cell:Cell, _card:Card ) -> void:
   remove_all_dropzones()
 
 
-func _on_card_selected( _card:Card ) -> void:
+func _on_card_selected( card:Card ) -> void:
   # TODO: Add card filters for the cell
 
-  get_cell(Vector2i(5,0)).add_card_dropzone()
+  for cell:Cell in get_cells( card.get_filter() ):
+    cell.add_card_dropzone()

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardCore" format=3 uid="uid://bwwagcpb8a3lh"]
+
+[ext_resource type="Script" uid="uid://b8djrg4vcghy8" path="res://core_scripts/card_core.gd" id="1_dd8jf"]
+[ext_resource type="Script" uid="uid://drgwcdoqoi2xc" path="res://core_scripts/unit_core.gd" id="2_1g0wx"]
+[ext_resource type="Resource" uid="uid://cl3w4p2cvtn3s" path="res://resources/units/tank.tres" id="3_n1n8m"]
+
+[resource]
+script = ExtResource("1_dd8jf")
+title = "Deploy a Battalion"
+text = "On a cell with 2 recon place 3 units"
+units = Array[ExtResource("2_1g0wx")]([ExtResource("3_n1n8m")])
+metadata/_custom_type_script = "uid://b8djrg4vcghy8"

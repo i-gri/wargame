@@ -2,22 +2,39 @@
 
 [ext_resource type="Resource" uid="uid://ci3vbnoug7tl8" path="res://resources/buses/grid_cell_events_bus.tres" id="1_vupmd"]
 [ext_resource type="Texture2D" uid="uid://kmhcjvhocn0l" path="res://assets/map/big-box-with-grid.png" id="2_get25"]
+[ext_resource type="Script" uid="uid://diwgul62m2pun" path="res://core_scripts/cell_core.gd" id="2_q57qo"]
 [ext_resource type="PackedScene" uid="uid://cc6jb7erkc2" path="res://nodes/cards/hand.tscn" id="3_get25"]
 [ext_resource type="Script" uid="uid://ct5n4ro7coaeo" path="res://nodes/managers/grid_manager.gd" id="3_ymsi1"]
 [ext_resource type="Resource" uid="uid://c084dwlsjo3eo" path="res://resources/buses/player_hand_card_events_bus.tres" id="5_30t7m"]
 [ext_resource type="PackedScene" uid="uid://dhtk88buxdwtg" path="res://nodes/managers/card_manager.tscn" id="5_kcfs2"]
+[ext_resource type="PackedScene" uid="uid://dxp8nmevhv513" path="res://nodes/cards/card.tscn" id="6_30t7m"]
+[ext_resource type="Resource" uid="uid://bwwagcpb8a3lh" path="res://resources/cards/deploy_card.tres" id="8_q57qo"]
+[ext_resource type="Script" uid="uid://ck8o7mnajs1np" path="res://scripts/service_locator.gd" id="10_brlib"]
+[ext_resource type="Script" uid="uid://b68fp3qqof0rn" path="res://nodes/managers/units_manager.gd" id="11_fdle2"]
 
 [sub_resource type="GDScript" id="GDScript_fobxg"]
 script/source = "extends Node2D
 
 @export var events_bus:CellEventsBus
 
+@export var cells:Dictionary[Vector2i, CellCore]
+
 func _ready() -> void:
   events_bus.mouse_entered.connect( func( cell ): cell.show_outline() )
   events_bus.mouse_exited.connect( func( cell ): cell.hide_outline() )
   
-  $GridManager.setup( $TileMapLayer )
+  $GridManager.setup( $TileMapLayer, cells )
 "
+
+[sub_resource type="Resource" id="Resource_brlib"]
+script = ExtResource("2_q57qo")
+recon_level = 2
+metadata/_custom_type_script = "uid://diwgul62m2pun"
+
+[sub_resource type="Resource" id="Resource_fdle2"]
+script = ExtResource("2_q57qo")
+recon_level = 2
+metadata/_custom_type_script = "uid://diwgul62m2pun"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ymsi1"]
 texture = ExtResource("2_get25")
@@ -33,6 +50,10 @@ sources/1 = SubResource("TileSetAtlasSource_ymsi1")
 [node name="TestingTheGrid" type="Node2D" unique_id=948643534]
 script = SubResource("GDScript_fobxg")
 events_bus = ExtResource("1_vupmd")
+cells = Dictionary[Vector2i, ExtResource("2_q57qo")]({
+Vector2i(5, 1): SubResource("Resource_brlib"),
+Vector2i(6, 1): SubResource("Resource_fdle2")
+})
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1753862216]
 tile_map_data = PackedByteArray("AAADAP7/AQAAAAAAAAADAP//AQAAAAAAAAADAAAAAQAAAAAAAAADAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAAEAAAAAQAAAAAAAAAEAP//AQAAAAAAAAAEAP7/AQAAAAAAAAAFAAEAAQAAAAAAAAAFAAAAAQAAAAAAAAAFAP//AQAAAAAAAAAFAP7/AQAAAAAAAAAGAAEAAQAAAAAAAAAGAAAAAQAAAAAAAAAGAP//AQAAAAAAAAAGAP7/AQAAAAAAAAAHAAEAAQAAAAAAAAAHAAAAAQAAAAAAAAAHAP//AQAAAAAAAAAHAP7/AQAAAAAAAAAIAAEAAQAAAAAAAAAIAAAAAQAAAAAAAAAIAP//AQAAAAAAAAAIAP7/AQAAAAAAAAA=")
@@ -46,9 +67,23 @@ card_events_bus = ExtResource("5_30t7m")
 [node name="Hand" parent="." unique_id=741375966 instance=ExtResource("3_get25")]
 position = Vector2(324, 303)
 card_events_bus = ExtResource("5_30t7m")
+card_width = null
 card_padding = 20
 
-[node name="CardManager" parent="." unique_id=674234159 node_paths=PackedStringArray("grid", "hand") instance=ExtResource("5_kcfs2")]
+[node name="Card4" parent="Hand" unique_id=219647131 instance=ExtResource("6_30t7m")]
+position = Vector2(-18, 0)
+core = ExtResource("8_q57qo")
+
+[node name="CardManager" parent="." unique_id=674234159 node_paths=PackedStringArray("grid", "hand", "service_locator") instance=ExtResource("5_kcfs2")]
 grid = NodePath("../GridManager")
 hand = NodePath("../Hand")
+service_locator = NodePath("../ServiceLocator")
 cell_events_bus = ExtResource("1_vupmd")
+
+[node name="ServiceLocator" type="Node" parent="." unique_id=176890934 node_paths=PackedStringArray("unit_manager", "grid_manager")]
+script = ExtResource("10_brlib")
+unit_manager = NodePath("../UnitsManager")
+grid_manager = NodePath("../GridManager")
+
+[node name="UnitsManager" type="Node" parent="." unique_id=400994349]
+script = ExtResource("11_fdle2")
