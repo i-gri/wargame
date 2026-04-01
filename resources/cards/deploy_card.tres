@@ -1,12 +1,24 @@
 [gd_resource type="Resource" script_class="CardCore" format=3 uid="uid://bwwagcpb8a3lh"]
 
 [ext_resource type="Script" uid="uid://b8djrg4vcghy8" path="res://core_scripts/card_core.gd" id="1_dd8jf"]
+[ext_resource type="Script" uid="uid://de53bqstua44o" path="res://scripts/buses/card_events_bus.gd" id="1_ungw0"]
 [ext_resource type="Script" uid="uid://drgwcdoqoi2xc" path="res://core_scripts/unit_core.gd" id="2_1g0wx"]
+[ext_resource type="Script" uid="uid://b8l7nr5lsrd4o" path="res://core_scripts/filter.gd" id="2_rib3q"]
 [ext_resource type="Resource" uid="uid://cl3w4p2cvtn3s" path="res://resources/units/tank.tres" id="3_n1n8m"]
+
+[sub_resource type="Resource" id="Resource_nu6x7"]
+script = ExtResource("1_ungw0")
+metadata/_custom_type_script = "uid://de53bqstua44o"
+
+[sub_resource type="Resource" id="Resource_6bqwd"]
+script = ExtResource("2_rib3q")
+metadata/_custom_type_script = "uid://b8l7nr5lsrd4o"
 
 [resource]
 script = ExtResource("1_dd8jf")
 title = "Deploy a Battalion"
 text = "On a cell with 2 recon place 3 units"
 units = Array[ExtResource("2_1g0wx")]([ExtResource("3_n1n8m")])
+filter = SubResource("Resource_6bqwd")
+bus = SubResource("Resource_nu6x7")
 metadata/_custom_type_script = "uid://b8djrg4vcghy8"

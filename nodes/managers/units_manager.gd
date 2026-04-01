@@ -1,5 +1,7 @@
 class_name UnitsManager extends Node
 
+@export var current_player:Player
+
 func deploy_in_cell( cell:Cell, units:Array[UnitCore], player:Player ) -> void:
   var tiles:Array[Vector2i] = cell.get_all_segments()
   tiles.shuffle()
@@ -13,6 +15,8 @@ func deploy_in_cell( cell:Cell, units:Array[UnitCore], player:Player ) -> void:
     add_child( unit )
 
 
+func deploy( cell:Cell, units:Array[UnitCore] ) -> void:
+  deploy_in_cell( cell, units, current_player )
 
 
 

@@ -15,3 +15,7 @@ func _ready() -> void:
 
 func play_on( cell:Cell, service_locator:ServiceLocator ) -> void:
   await core.play_on( cell, service_locator )
+
+
+func get_filter() -> Callable:
+  return core.get_filter()

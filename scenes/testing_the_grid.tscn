@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://bwwagcpb8a3lh" path="res://resources/cards/deploy_card.tres" id="8_q57qo"]
 [ext_resource type="Script" uid="uid://ck8o7mnajs1np" path="res://scripts/service_locator.gd" id="10_brlib"]
 [ext_resource type="Script" uid="uid://b68fp3qqof0rn" path="res://nodes/managers/units_manager.gd" id="11_fdle2"]
+[ext_resource type="Resource" uid="uid://d2xjfw2do4ryi" path="res://resources/players/first_player.tres" id="12_gwqgd"]
 
 [sub_resource type="GDScript" id="GDScript_fobxg"]
 script/source = "extends Node2D
@@ -80,10 +81,11 @@ hand = NodePath("../Hand")
 service_locator = NodePath("../ServiceLocator")
 cell_events_bus = ExtResource("1_vupmd")
 
-[node name="ServiceLocator" type="Node" parent="." unique_id=176890934 node_paths=PackedStringArray("unit_manager", "grid_manager")]
+[node name="ServiceLocator" type="Node" parent="." unique_id=176890934 node_paths=PackedStringArray("units_manager", "grid_manager")]
 script = ExtResource("10_brlib")
-unit_manager = NodePath("../UnitsManager")
+units_manager = NodePath("../UnitsManager")
 grid_manager = NodePath("../GridManager")
 
 [node name="UnitsManager" type="Node" parent="." unique_id=400994349]
 script = ExtResource("11_fdle2")
+current_player = ExtResource("12_gwqgd")
