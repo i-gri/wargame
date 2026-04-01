@@ -31,6 +31,10 @@ func get_cell( tile:Vector2i ) -> Cell:
   return grid.get(tile)
 
 
+func get_cell_in_position( position:Vector2 ) -> Cell:
+  return grid[map.local_to_map( position )]
+
+
 func get_cells( filter:Callable ) -> Array[Cell]:
   return grid.values().filter( filter )
 

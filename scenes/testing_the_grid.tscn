@@ -8,10 +8,17 @@
 [ext_resource type="Resource" uid="uid://c084dwlsjo3eo" path="res://resources/buses/player_hand_card_events_bus.tres" id="5_30t7m"]
 [ext_resource type="PackedScene" uid="uid://dhtk88buxdwtg" path="res://nodes/managers/card_manager.tscn" id="5_kcfs2"]
 [ext_resource type="PackedScene" uid="uid://dxp8nmevhv513" path="res://nodes/cards/card.tscn" id="6_30t7m"]
-[ext_resource type="Resource" uid="uid://bwwagcpb8a3lh" path="res://resources/cards/deploy_card.tres" id="8_q57qo"]
+[ext_resource type="Script" uid="uid://c6nmfkvowl3bx" path="res://core_scripts/filters/deploy_zone_filter.gd" id="8_ph116"]
+[ext_resource type="Script" uid="uid://clevfmdvcbr86" path="res://core_scripts/cards/deploy_card_core.gd" id="9_5jr56"]
 [ext_resource type="Script" uid="uid://ck8o7mnajs1np" path="res://scripts/service_locator.gd" id="10_brlib"]
+[ext_resource type="Script" uid="uid://drgwcdoqoi2xc" path="res://core_scripts/unit_core.gd" id="10_tc0jp"]
 [ext_resource type="Script" uid="uid://b68fp3qqof0rn" path="res://nodes/managers/units_manager.gd" id="11_fdle2"]
+[ext_resource type="Resource" uid="uid://cl3w4p2cvtn3s" path="res://resources/units/tank.tres" id="11_xwlwv"]
 [ext_resource type="Resource" uid="uid://d2xjfw2do4ryi" path="res://resources/players/first_player.tres" id="12_gwqgd"]
+[ext_resource type="Resource" uid="uid://uthg86ynn52t" path="res://resources/units/rifle_man.tres" id="12_ujn3o"]
+[ext_resource type="Script" uid="uid://bt4xcnbfvhwb8" path="res://core_scripts/filters/unit_presence_filter.gd" id="13_xwlwv"]
+[ext_resource type="Script" uid="uid://c54a6pjahd0jk" path="res://core_scripts/cards/move_card_core.gd" id="14_ujn3o"]
+[ext_resource type="PackedScene" uid="uid://ba5a321eieypp" path="res://nodes/unit/unit.tscn" id="17_5jr56"]
 
 [sub_resource type="GDScript" id="GDScript_fobxg"]
 script/source = "extends Node2D
@@ -48,6 +55,30 @@ tile_layout = 5
 tile_size = Vector2i(80, 40)
 sources/1 = SubResource("TileSetAtlasSource_ymsi1")
 
+[sub_resource type="Resource" id="Resource_5jr56"]
+script = ExtResource("8_ph116")
+metadata/_custom_type_script = "uid://c6nmfkvowl3bx"
+
+[sub_resource type="Resource" id="Resource_low30"]
+script = ExtResource("9_5jr56")
+units = Array[ExtResource("10_tc0jp")]([ExtResource("11_xwlwv"), ExtResource("12_ujn3o")])
+filter = SubResource("Resource_5jr56")
+bus = ExtResource("5_30t7m")
+metadata/_custom_type_script = "uid://clevfmdvcbr86"
+
+[sub_resource type="Resource" id="Resource_ga7c2"]
+script = ExtResource("13_xwlwv")
+number_of_units = 1
+metadata/_custom_type_script = "uid://bt4xcnbfvhwb8"
+
+[sub_resource type="Resource" id="Resource_kksvh"]
+script = ExtResource("14_ujn3o")
+title = "Move"
+text = "Move all units "
+filter = SubResource("Resource_ga7c2")
+bus = ExtResource("5_30t7m")
+metadata/_custom_type_script = "uid://c54a6pjahd0jk"
+
 [node name="TestingTheGrid" type="Node2D" unique_id=948643534]
 script = SubResource("GDScript_fobxg")
 events_bus = ExtResource("1_vupmd")
@@ -72,8 +103,12 @@ card_width = null
 card_padding = 20
 
 [node name="Card4" parent="Hand" unique_id=219647131 instance=ExtResource("6_30t7m")]
-position = Vector2(-18, 0)
-core = ExtResource("8_q57qo")
+position = Vector2(-17, -18)
+core = SubResource("Resource_low30")
+
+[node name="Card5" parent="Hand" unique_id=365690761 instance=ExtResource("6_30t7m")]
+position = Vector2(-17, -18)
+core = SubResource("Resource_kksvh")
 
 [node name="CardManager" parent="." unique_id=674234159 node_paths=PackedStringArray("grid", "hand", "service_locator") instance=ExtResource("5_kcfs2")]
 grid = NodePath("../GridManager")
@@ -86,6 +121,27 @@ script = ExtResource("10_brlib")
 units_manager = NodePath("../UnitsManager")
 grid_manager = NodePath("../GridManager")
 
-[node name="UnitsManager" type="Node" parent="." unique_id=400994349]
+[node name="UnitsManager" type="Node" parent="." unique_id=400994349 node_paths=PackedStringArray("grid")]
 script = ExtResource("11_fdle2")
 current_player = ExtResource("12_gwqgd")
+grid = NodePath("../GridManager")
+
+[node name="Unit" parent="UnitsManager" unique_id=1297926918 instance=ExtResource("17_5jr56")]
+position = Vector2(300, 174)
+core = ExtResource("12_ujn3o")
+player = ExtResource("12_gwqgd")
+
+[node name="Unit2" parent="UnitsManager" unique_id=1708599686 instance=ExtResource("17_5jr56")]
+position = Vector2(270, 179)
+core = ExtResource("12_ujn3o")
+player = ExtResource("12_gwqgd")
+
+[node name="Unit3" parent="UnitsManager" unique_id=551688573 instance=ExtResource("17_5jr56")]
+position = Vector2(280, 164)
+core = ExtResource("12_ujn3o")
+player = ExtResource("12_gwqgd")
+
+[node name="Unit4" parent="UnitsManager" unique_id=1462993601 instance=ExtResource("17_5jr56")]
+position = Vector2(290, 190)
+core = ExtResource("11_xwlwv")
+player = ExtResource("12_gwqgd")

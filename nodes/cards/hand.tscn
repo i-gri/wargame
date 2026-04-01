@@ -1,15 +1,6 @@
 [gd_scene format=3 uid="uid://cc6jb7erkc2"]
 
 [ext_resource type="Script" uid="uid://pivvhv5dahmp" path="res://nodes/cards/hand.gd" id="1_nimwk"]
-[ext_resource type="PackedScene" uid="uid://dxp8nmevhv513" path="res://nodes/cards/card.tscn" id="2_c82pu"]
 
 [node name="Hand" type="Node2D" unique_id=741375966]
 script = ExtResource("1_nimwk")
-
-[node name="Card" parent="." unique_id=219647131 instance=ExtResource("2_c82pu")]
-
-[node name="Card2" parent="." unique_id=183872429 instance=ExtResource("2_c82pu")]
-position = Vector2(87, -1)
-
-[node name="Card3" parent="." unique_id=784748694 instance=ExtResource("2_c82pu")]
-position = Vector2(175, 0)
