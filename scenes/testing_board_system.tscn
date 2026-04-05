@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bli83c8ijy4k6"]
+
+[ext_resource type="Texture2D" uid="uid://kmhcjvhocn0l" path="res://assets/map/big-box-with-grid.png" id="1_7kwo4"]
+[ext_resource type="PackedScene" uid="uid://h5ua7mkblwyn" path="res://nodes/cell/cell.tscn" id="2_bnox8"]
+[ext_resource type="PackedScene" uid="uid://ba5a321eieypp" path="res://nodes/unit/unit.tscn" id="3_i6280"]
+
+[node name="TestingBoardSystem" type="Node2D" unique_id=1118548979]
+
+[node name="BigBoxWithGrid" type="Sprite2D" parent="." unique_id=1562151345]
+position = Vector2(157, 107)
+texture = ExtResource("1_7kwo4")
+
+[node name="BigBoxWithGrid2" type="Sprite2D" parent="." unique_id=250810853]
+position = Vector2(203, 130)
+texture = ExtResource("1_7kwo4")
+
+[node name="Cell" parent="." unique_id=377588126 instance=ExtResource("2_bnox8")]
+position = Vector2(157, 106)
+
+[node name="Cell2" parent="." unique_id=1867874783 instance=ExtResource("2_bnox8")]
+position = Vector2(203, 129)
+
+[node name="UnitsManager" type="Node" parent="." unique_id=574217878]
+
+[node name="Unit" parent="UnitsManager" unique_id=1297926918 instance=ExtResource("3_i6280")]
+position = Vector2(143, 113)

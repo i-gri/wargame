@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bueidddf0hc5i"]
+
+[ext_resource type="Texture2D" uid="uid://kmhcjvhocn0l" path="res://assets/map/big-box-with-grid.png" id="1_cra16"]
+[ext_resource type="PackedScene" uid="uid://q7o40qt7n6l5" path="res://systems/quadrant_and_pawns/quadrant.tscn" id="2_ntimy"]
+[ext_resource type="PackedScene" uid="uid://gcwt2mchoqxc" path="res://systems/quadrant_and_pawns/pawn.tscn" id="3_ntimy"]
+[ext_resource type="Script" uid="uid://ckcwktafkppxj" path="res://systems/quadrant_and_pawns/board_controller.gd" id="4_m2b72"]
+
+[sub_resource type="GDScript" id="GDScript_7g3km"]
+script/source = "extends Node2D
+
+func _ready() -> void:
+  $BoardController.add_pawn_dropzone( $Quadrant )
+  $BoardController.make_pawn_draggable( $Pawn )
+"
+
+[node name="QuadrantSystem" type="Node2D" unique_id=1155955223]
+script = SubResource("GDScript_7g3km")
+
+[node name="BigBoxWithGrid" type="Sprite2D" parent="." unique_id=1157080609]
+position = Vector2(180, 137)
+texture = ExtResource("1_cra16")
+
+[node name="Quadrant" parent="." unique_id=377588126 instance=ExtResource("2_ntimy")]
+position = Vector2(180, 136)
+
+[node name="Pawn" parent="." unique_id=87879423 instance=ExtResource("3_ntimy")]
+position = Vector2(148, 114)
+
+[node name="BoardController" type="Node" parent="." unique_id=152751838]
+script = ExtResource("4_m2b72")

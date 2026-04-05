@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://gcwt2mchoqxc"]
+
+[ext_resource type="Script" uid="uid://dou32gallp8yu" path="res://systems/quadrant_and_pawns/pawn.gd" id="1_xfkrj"]
+[ext_resource type="Texture2D" uid="uid://d0fhbr5ttjr3f" path="res://assets/units/tank.png" id="2_150e1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_44s85"]
+radius = 5.0
+
+[node name="Pawn" type="Area2D" unique_id=87879423]
+script = ExtResource("1_xfkrj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=591584662]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_150e1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=270531855]
+shape = SubResource("CircleShape2D_44s85")
