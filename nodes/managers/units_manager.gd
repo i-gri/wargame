@@ -36,6 +36,3 @@ func deploy_in_cell( cell:Cell, units:Array[UnitCore], player:Player ) -> void:
 
 func deploy( cell:Cell, units:Array[UnitCore] ) -> void:
   deploy_in_cell( cell, units, current_player )
-
-
-

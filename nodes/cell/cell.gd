@@ -110,6 +110,16 @@ func add_unit( unit:Unit, segment:Vector2i ) -> void:
   occupied_sections[segment] = unit
 
 
+func get_units_for( player:Player ) -> Array[Unit]:
+  var result:Array[Unit] = []
+  for unit:Unit in occupied_sections.values():
+    if unit.player != player: continue
+
+    result.append( unit )
+
+  return result
+
+
 func get_all_segments() -> Array[Vector2i]:
   var result:Array[Vector2i] = []
   for x in 4:

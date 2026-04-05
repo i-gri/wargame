@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://bt4xcnbfvhwb8" path="res://core_scripts/filters/unit_presence_filter.gd" id="13_xwlwv"]
 [ext_resource type="Script" uid="uid://c54a6pjahd0jk" path="res://core_scripts/cards/move_card_core.gd" id="14_ujn3o"]
 [ext_resource type="PackedScene" uid="uid://ba5a321eieypp" path="res://nodes/unit/unit.tscn" id="17_5jr56"]
+[ext_resource type="Script" uid="uid://b5wmn54obnlua" path="res://nodes/managers/player_controller.gd" id="20_ujn3o"]
 
 [sub_resource type="GDScript" id="GDScript_fobxg"]
 script/source = "extends Node2D
@@ -68,7 +69,6 @@ metadata/_custom_type_script = "uid://clevfmdvcbr86"
 
 [sub_resource type="Resource" id="Resource_ga7c2"]
 script = ExtResource("13_xwlwv")
-number_of_units = 1
 metadata/_custom_type_script = "uid://bt4xcnbfvhwb8"
 
 [sub_resource type="Resource" id="Resource_kksvh"]
@@ -145,3 +145,8 @@ player = ExtResource("12_gwqgd")
 position = Vector2(290, 190)
 core = ExtResource("11_xwlwv")
 player = ExtResource("12_gwqgd")
+
+[node name="PlayerController" type="Node" parent="." unique_id=2047469674 node_paths=PackedStringArray("grid", "units_manager")]
+script = ExtResource("20_ujn3o")
+grid = NodePath("../GridManager")
+units_manager = NodePath("../UnitsManager")
