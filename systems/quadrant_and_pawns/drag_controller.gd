@@ -1,4 +1,12 @@
-class_name BoardController extends Node
+class_name DragController extends Node
+
+
+func make_tunel( origin:Quadrant, target:Quadrant ) -> void:
+  for unit:Pawn in origin.get_units():
+    make_pawn_draggable( unit )
+
+  add_pawn_dropzone( target )
+  add_origin_dropzone( origin )
 
 func make_pawn_draggable( pawn:Pawn ) -> void:
   var drag_component := Draggable.new()

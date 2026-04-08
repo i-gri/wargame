@@ -7,7 +7,6 @@ var drop_zone:DropZone
 
 func _ready() -> void:
   cells = calculator.generate_grid()
-  print_debug( cells )
 
 
 func occupy_cell( pawn:Pawn ) -> void:
@@ -37,7 +36,7 @@ func get_random_cell() -> Vector2i:
 func add_snap_dropzone( dropzone:DropZone, cell_ids:Array[Vector2i] ) -> void:
   drop_zone = dropzone
 
-  drop_zone.drop_rejected.connect( _debug_baby )
+  drop_zone.drop_applied.connect( _on_unit_dropped )
 
   for cell:Vector2i in cell_ids:
     var cell_pos:Vector2 = calculator.get_cell_position_with_offset( cell )
@@ -52,8 +51,7 @@ func add_snap_dropzone( dropzone:DropZone, cell_ids:Array[Vector2i] ) -> void:
 
 # expects pawns to be on Layer 1
 func _on_pawn_exited(pawn: Pawn) -> void:
-  print_debug("out of the dropZone: ", pawn)
-  pass # Replace with function body.
+  if drop_zone: return  
 
 
 func _on_pawn_entered(pawn: Pawn) -> void:
@@ -62,5 +60,5 @@ func _on_pawn_entered(pawn: Pawn) -> void:
   occupy_cell( pawn )
 
 
-func _debug_baby(_dropzone:DropZone, unit:Area2D, _plan:DropPlan) -> void:
-  print_debug("ass")
+func _on_unit_dropped( _dropzone:DropZone, unit:Area2D, _plan:DropPlan ) -> void:
+  pass
