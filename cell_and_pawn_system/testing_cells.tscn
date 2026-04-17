@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cy0lgwspl8qhw"]
+
+[ext_resource type="PackedScene" uid="uid://btsk60egvukhj" path="res://cell_and_pawn_system/cell.tscn" id="1_kt4ln"]
+[ext_resource type="PackedScene" uid="uid://csakj4dhgi3xd" path="res://cell_and_pawn_system/pawn.tscn" id="2_jhmn5"]
+[ext_resource type="Script" uid="uid://c3sco0epggclo" path="res://cell_and_pawn_system/pawn_controller.gd" id="3_6xcje"]
+[ext_resource type="Resource" uid="uid://cl1ao7tv4m60n" path="res://cell_and_pawn_system/resources/4x4-80px40p.tres" id="4_xepbl"]
+
+[sub_resource type="GDScript" id="GDScript_6xcje"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	print_debug('asss')
+	if event is InputEventKey:
+		print_debug('in the fdirst')
+		if event.is_released() and event.keycode == KEY_M:
+			print_debug('in the secont')
+			var array:Array[Pawn] =[$Pawn, $Pawn2]
+			$PawnController.move_units( array, $Cell2, $Cell)
+"
+
+[node name="TestingCells" type="Node2D" unique_id=535631179]
+script = SubResource("GDScript_6xcje")
+
+[node name="Cell" parent="." unique_id=964849692 instance=ExtResource("1_kt4ln")]
+position = Vector2(266, 179)
+
+[node name="Cell2" parent="." unique_id=1918646788 instance=ExtResource("1_kt4ln")]
+position = Vector2(226, 199)
+
+[node name="Pawn" parent="." unique_id=1687830141 instance=ExtResource("2_jhmn5")]
+position = Vector2(235, 206)
+
+[node name="Pawn2" parent="." unique_id=436740835 instance=ExtResource("2_jhmn5")]
+position = Vector2(217, 195)
+
+[node name="PawnController" type="Node" parent="." unique_id=180695318]
+script = ExtResource("3_6xcje")
+calculator = ExtResource("4_xepbl")

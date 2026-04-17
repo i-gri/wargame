@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="IsometricCalculator" format=3 uid="uid://cl1ao7tv4m60n"]
+
+[ext_resource type="Script" uid="uid://b7xjfaacqp7xr" path="res://cell_and_pawn_system/isometric_calculator.gd" id="1_osmiw"]
+
+[resource]
+script = ExtResource("1_osmiw")
+metadata/_custom_type_script = "uid://b7xjfaacqp7xr"
