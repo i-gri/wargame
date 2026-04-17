@@ -4,6 +4,8 @@ class_name PawnController extends Node
 
 
 func move_units( units:Array[Pawn], origin:Cell, destination:Cell ) -> void:
+	if origin == destination: return 
+
 	var direction:Vector2i = get_direction( origin, destination )
 	var new_unit_positions:Array[Vector2] = get_posible_positions( direction, destination )
 
@@ -12,8 +14,7 @@ func move_units( units:Array[Pawn], origin:Cell, destination:Cell ) -> void:
 
 
 func get_direction( origin:Cell, destination:Cell ) -> Vector2i:
-	return Vector2i(0,1)
-
+	return origin.tile - destination.tile	 
 
 func get_posible_positions( direction:Vector2i, destination:Cell ) -> Array[Vector2]:
 	var result:Array[Vector2] = []

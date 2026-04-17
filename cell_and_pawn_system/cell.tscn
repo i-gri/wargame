@@ -9,6 +9,7 @@ collision_mask = 2
 script = ExtResource("1_naeb7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=671964440]
+visible = false
 texture = ExtResource("1_fmvwa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=722488001]

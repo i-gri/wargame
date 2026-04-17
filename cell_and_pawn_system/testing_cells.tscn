@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cy0lgwspl8qhw"]
 
-[ext_resource type="PackedScene" uid="uid://btsk60egvukhj" path="res://cell_and_pawn_system/cell.tscn" id="1_kt4ln"]
+[ext_resource type="Texture2D" uid="uid://boxqnt3cjfb7m" path="res://assets/map/big-box-with-grid.png" id="1_xepbl"]
+[ext_resource type="Script" uid="uid://dk0kb15guxlph" path="res://cell_and_pawn_system/grid.gd" id="2_7erpr"]
 [ext_resource type="PackedScene" uid="uid://csakj4dhgi3xd" path="res://cell_and_pawn_system/pawn.tscn" id="2_jhmn5"]
 [ext_resource type="Script" uid="uid://c3sco0epggclo" path="res://cell_and_pawn_system/pawn_controller.gd" id="3_6xcje"]
 [ext_resource type="Resource" uid="uid://cl1ao7tv4m60n" path="res://cell_and_pawn_system/resources/4x4-80px40p.tres" id="4_xepbl"]
@@ -29,21 +30,52 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			$PawnController.move_units( array, $Cell2, $Cell)
 "
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7erpr"]
+texture = ExtResource("1_xepbl")
+texture_region_size = Vector2i(80, 40)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_6xcje"]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(80, 40)
+sources/0 = SubResource("TileSetAtlasSource_7erpr")
+
+[sub_resource type="GDScript" id="GDScript_j4u2f"]
+script/source = "extends Node
+
+@export var tile_map:Grid
+@export var controller:PawnController
+
+func _ready() -> void:
+	$\"../TileMapLayer\".cell_selected.connect( _on_tile_click )
+	
+	
+func _on_tile_click( cell:Cell ) -> void:
+	var units:Array[Pawn] = [$\"../Pawn\", $\"../Pawn2\"]
+	var origin = tile_map.get_cell_in_position( units.front().position )
+	$\"../PawnController\".move_units( units, origin, cell )
+"
+
 [node name="TestingCells" type="Node2D" unique_id=535631179]
 script = SubResource("GDScript_6xcje")
 
-[node name="Cell" parent="." unique_id=964849692 instance=ExtResource("1_kt4ln")]
-position = Vector2(266, 179)
-
-[node name="Cell2" parent="." unique_id=1918646788 instance=ExtResource("1_kt4ln")]
-position = Vector2(226, 199)
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=427059887]
+tile_map_data = PackedByteArray(0, 0, 5, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_6xcje")
+script = ExtResource("2_7erpr")
 
 [node name="Pawn" parent="." unique_id=1687830141 instance=ExtResource("2_jhmn5")]
-position = Vector2(235, 206)
+position = Vector2(162, 166)
 
 [node name="Pawn2" parent="." unique_id=436740835 instance=ExtResource("2_jhmn5")]
-position = Vector2(217, 195)
+position = Vector2(144, 155)
 
 [node name="PawnController" type="Node" parent="." unique_id=180695318]
 script = ExtResource("3_6xcje")
 calculator = ExtResource("4_xepbl")
+
+[node name="PlayerControl" type="Node" parent="." unique_id=1693971538 node_paths=PackedStringArray("tile_map", "controller")]
+script = SubResource("GDScript_j4u2f")
+tile_map = NodePath("../TileMapLayer")
+controller = NodePath("../PawnController")
