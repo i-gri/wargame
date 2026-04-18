@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://csakj4dhgi3xd"]
 
 [ext_resource type="Texture2D" uid="uid://d4f6drpp5q13v" path="res://assets/units/tank.png" id="1_udp51"]
-[ext_resource type="Script" uid="uid://bsd58pfje1wjf" path="res://cell_and_pawn_system/pawn.gd" id="1_ybxht"]
+[ext_resource type="Script" uid="uid://bsd58pfje1wjf" path="res://nodes/pawns/pawn.gd" id="1_ybxht"]
 [ext_resource type="Material" uid="uid://d0478fxisac4l" path="res://resources/palettes/red_unit_palette.tres" id="2_ol5dv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ybxht"]

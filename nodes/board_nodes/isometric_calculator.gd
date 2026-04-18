@@ -25,16 +25,16 @@ var inverted_matrix:Dictionary[String, float] = {
 		'd': det * a,
 }
 
-func position_to_cell( vector:Vector2 ) -> Vector2i:
+func position_to_section( vector:Vector2 ) -> Vector2i:
 		return Vector2( ( vector.x + 40 ) * inverted_matrix.get('a') + vector.y * inverted_matrix.get('b'),
 																		( vector.x + 40 )* inverted_matrix.get('c') + vector.y * inverted_matrix.get('d'))
 
-func get_cell_position( cell:Vector2i ) -> Vector2:
+func get_section_position( cell:Vector2i ) -> Vector2:
 		return cell.x * Vector2(1,.5) * CELL_SIZE.x/2 + cell.y * Vector2(-1,.5) * CELL_SIZE.y/2 + COORD_OFFSET
 
 
-func get_cell_position_with_offset( cell:Vector2i ) -> Vector2:
-		return get_cell_position( cell ) + UNIT_OFFSET
+func get_section_position_with_offset( cell:Vector2i ) -> Vector2:
+		return get_section_position( cell ) + UNIT_OFFSET
 
 
 func generate_grid() -> Dictionary[Vector2i, Pawn]:

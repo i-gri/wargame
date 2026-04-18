@@ -23,7 +23,7 @@ func get_posible_positions( direction:Vector2i, destination:Cell ) -> Array[Vect
 	var result:Array[Vector2] = []
 
 	for quad:Vector2i in calculator.generate_half_grid( direction ):
-		result.append( calculator.get_cell_position( quad ) + destination.position )
+		result.append( calculator.get_section_position( quad ) + destination.position )
 
 	return result
 

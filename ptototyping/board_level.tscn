@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://kxd7yinl7r52"]
+
+[ext_resource type="PackedScene" uid="uid://dfuj3lrwexbsx" path="res://ptototyping/grid.tscn" id="1_2eofg"]
+[ext_resource type="PackedScene" uid="uid://cdve4tf2oldee" path="res://nodes/pawns/pawn_manager.tscn" id="2_h8c3k"]
+[ext_resource type="Script" uid="uid://bbuvwfeo03451" path="res://nodes/pawns/pawn_manager.gd" id="3_af3hp"]
+[ext_resource type="PackedScene" uid="uid://csakj4dhgi3xd" path="res://nodes/pawns/pawn.tscn" id="4_ae16g"]
+[ext_resource type="Resource" uid="uid://bsnoy3wu6pijt" path="res://resources/players/player_one.tres" id="5_sxwi7"]
+[ext_resource type="Script" uid="uid://cr07ppjrh6cy1" path="res://nodes/player_controller/player_controller.gd" id="6_sxwi7"]
+
+[node name="BoardLevel" type="Node2D" unique_id=1090471150]
+
+[node name="TileMapLayer" parent="." unique_id=946590364 instance=ExtResource("1_2eofg")]
+
+[node name="PawnManager" parent="." unique_id=1229331664 instance=ExtResource("2_h8c3k")]
+script = ExtResource("3_af3hp")
+
+[node name="Pawn" parent="PawnManager" unique_id=1687830141 instance=ExtResource("4_ae16g")]
+position = Vector2(162, 156)
+player = ExtResource("5_sxwi7")
+
+[node name="Pawn2" parent="PawnManager" unique_id=708071199 instance=ExtResource("4_ae16g")]
+position = Vector2(281, 114)
+facing = -1
+
+[node name="Pawn3" parent="PawnManager" unique_id=73488219 instance=ExtResource("4_ae16g")]
+position = Vector2(192, 160)
+player = ExtResource("5_sxwi7")
+
+[node name="PlayerController" type="Node" parent="." unique_id=1143481134 node_paths=PackedStringArray("grid", "pawn_manager")]
+script = ExtResource("6_sxwi7")
+grid = NodePath("../TileMapLayer")
+pawn_manager = NodePath("../PawnManager")

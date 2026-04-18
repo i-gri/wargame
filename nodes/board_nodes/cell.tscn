@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://btsk60egvukhj"]
 
 [ext_resource type="Texture2D" uid="uid://boxqnt3cjfb7m" path="res://assets/map/big-box-with-grid.png" id="1_fmvwa"]
-[ext_resource type="Script" uid="uid://dj6vauc4d673l" path="res://cell_and_pawn_system/cell.gd" id="1_naeb7"]
-[ext_resource type="Shape2D" uid="uid://bp84h8fc7ndjd" path="res://cell_and_pawn_system/resources/cell_collision_shape.tres" id="2_glslf"]
+[ext_resource type="Script" uid="uid://dj6vauc4d673l" path="res://nodes/board_nodes/cell.gd" id="1_naeb7"]
+[ext_resource type="Shape2D" uid="uid://bp84h8fc7ndjd" path="res://nodes/board_nodes/resources/cell_collision_shape.tres" id="2_glslf"]
+[ext_resource type="Resource" uid="uid://cl1ao7tv4m60n" path="res://nodes/board_nodes/resources/4x4-80px40p.tres" id="2_v40vk"]
 
 [node name="Cell" type="Area2D" unique_id=964849692]
 collision_mask = 2
 script = ExtResource("1_naeb7")
-debug = null
+calculator = ExtResource("2_v40vk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=671964440]
 visible = false

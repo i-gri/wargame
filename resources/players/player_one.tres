@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Player" format=3 uid="uid://bsnoy3wu6pijt"]
+
+[ext_resource type="Script" uid="uid://dxcyp24wacn1a" path="res://scripts/player.gd" id="1_me881"]
+[ext_resource type="Material" uid="uid://byrykypq5375j" path="res://resources/palettes/yellow_unit_palette.tres" id="1_oo3ty"]
+
+[resource]
+script = ExtResource("1_me881")
+palette = ExtResource("1_oo3ty")
+metadata/_custom_type_script = "uid://dxcyp24wacn1a"
