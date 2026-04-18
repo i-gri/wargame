@@ -59,16 +59,16 @@ func generate_half_grid( direction:Vector2i ) -> Array[Vector2i]:
 
 func y_range( direction:int ) -> Array:
 		var full_range := range( 0, grid_index_size.y * -1, -1 )
+		var result:Array = []
+
 		if direction == 0:
 				return full_range
 		if direction == 1:
-				var result:Array = []
-				for i:int in grid_index_size.y/2:
-						result.append( full_range.pop_front() )
+			for i:int in grid_index_size.y/2:
+				result.append( full_range.pop_front() )
 
-				return result
+			return result
 
-		var result:Array = []
 		for i:int in grid_index_size.y/2:
 				result.append( full_range.pop_back() )
 
@@ -77,17 +77,17 @@ func y_range( direction:int ) -> Array:
 
 func x_range( direction:int ) -> Array:
 		var full_range:Array = range( grid_index_size.x )
+		var result:Array = []
+
 		if direction == 0:
 				return full_range
 		if direction == 1:
-				var result:Array = []
-				for i:int in grid_index_size.x/2:
-						result.append( full_range.pop_back() )
+			for i:int in grid_index_size.x/2:
+				result.append( full_range.pop_back() )
 
-				return result
+			return result
 
-		var result:Array = []
 		for i:int in grid_index_size.x/2:
-				result.append( full_range.pop_front() )
+			result.append( full_range.pop_front() )
 
 		return result

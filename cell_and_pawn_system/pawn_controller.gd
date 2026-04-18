@@ -1,6 +1,7 @@
 class_name PawnController extends Node
 
 @export var calculator:IsometricCalculator
+@export var default_die:DiceCore
 
 
 func move_units( units:Array[Pawn], origin:Cell, destination:Cell ) -> void:
@@ -10,11 +11,13 @@ func move_units( units:Array[Pawn], origin:Cell, destination:Cell ) -> void:
 	var new_unit_positions:Array[Vector2] = get_posible_positions( direction, destination )
 
 	for unit:Pawn in units:
+		unit.moved.connect( roll_units_dice.bind( unit ), CONNECT_ONE_SHOT )
 		unit.move_to( new_unit_positions.pop_at(randi()%new_unit_positions.size()))
 
 
 func get_direction( origin:Cell, destination:Cell ) -> Vector2i:
 	return origin.tile - destination.tile	 
+	
 
 func get_posible_positions( direction:Vector2i, destination:Cell ) -> Array[Vector2]:
 	var result:Array[Vector2] = []
@@ -23,3 +26,15 @@ func get_posible_positions( direction:Vector2i, destination:Cell ) -> Array[Vect
 		result.append( calculator.get_cell_position( quad ) + destination.position )
 
 	return result
+
+func roll_units_dice( pawn:Pawn ) -> void:
+	pop_dice_result( pawn.position, default_die )
+
+
+func pop_dice_result( position:Vector2, die:DiceCore ) -> void:
+	var node:Token = load("uid://bqmhwhfy8x0b1").instantiate()
+
+	node.dice = die.roll()
+	node.position = position
+
+	add_child( node )

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bqmhwhfy8x0b1"]
+
+[ext_resource type="Texture2D" uid="uid://drm2ds6tfa126" path="res://assets/icons/dice_empty.svg" id="1_8vhyq"]
+[ext_resource type="Script" uid="uid://c1r7hgahquvrp" path="res://dice_system/token.gd" id="2_ate7o"]
+
+[node name="Token" type="Sprite2D" unique_id=2017717859]
+modulate = Color(0, 0.105882354, 0.31764707, 0.9411765)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_8vhyq")
+script = ExtResource("2_ate7o")

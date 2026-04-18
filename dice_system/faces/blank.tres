@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DiceFace" format=3 uid="uid://cqwd475efymkd"]
+
+[ext_resource type="Texture2D" uid="uid://drm2ds6tfa126" path="res://assets/icons/dice_empty.svg" id="1_hmf7a"]
+[ext_resource type="Script" uid="uid://0p8bo78tv2v" path="res://dice_system/dice_face.gd" id="1_ygayi"]
+
+[resource]
+script = ExtResource("1_ygayi")
+face = ExtResource("1_hmf7a")
+metadata/_custom_type_script = "uid://0p8bo78tv2v"

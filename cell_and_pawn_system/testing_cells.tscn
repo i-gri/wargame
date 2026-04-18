@@ -1,10 +1,12 @@
-[gd_scene format=3 uid="uid://cy0lgwspl8qhw"]
+[gd_scene format=4 uid="uid://cy0lgwspl8qhw"]
 
 [ext_resource type="Texture2D" uid="uid://boxqnt3cjfb7m" path="res://assets/map/big-box-with-grid.png" id="1_xepbl"]
 [ext_resource type="Script" uid="uid://dk0kb15guxlph" path="res://cell_and_pawn_system/grid.gd" id="2_7erpr"]
 [ext_resource type="PackedScene" uid="uid://csakj4dhgi3xd" path="res://cell_and_pawn_system/pawn.tscn" id="2_jhmn5"]
 [ext_resource type="Script" uid="uid://c3sco0epggclo" path="res://cell_and_pawn_system/pawn_controller.gd" id="3_6xcje"]
+[ext_resource type="Shader" uid="uid://dyes3vymnc3g1" path="res://resources/shaders/unit_palette_swap.gdshader" id="4_j4u2f"]
 [ext_resource type="Resource" uid="uid://cl1ao7tv4m60n" path="res://cell_and_pawn_system/resources/4x4-80px40p.tres" id="4_xepbl"]
+[ext_resource type="Resource" uid="uid://4olg7nhbqbxv" path="res://dice_system/dice/basic_die.tres" id="7_hmlmf"]
 
 [sub_resource type="GDScript" id="GDScript_6xcje"]
 script/source = "extends Node2D
@@ -16,16 +18,13 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	print_debug('asss')
 	if event is InputEventKey:
-		print_debug('in the fdirst')
 		if event.is_released() and event.keycode == KEY_M:
-			print_debug('in the secont')
 			var array:Array[Pawn] =[$Pawn, $Pawn2]
 			$PawnController.move_units( array, $Cell2, $Cell)
 "
@@ -40,6 +39,30 @@ tile_shape = 1
 tile_layout = 5
 tile_size = Vector2i(80, 40)
 sources/0 = SubResource("TileSetAtlasSource_7erpr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hmlmf"]
+shader = ExtResource("4_j4u2f")
+shader_parameter/original_main_color = Color(0.5176471, 0.7764706, 0.4117647, 1)
+shader_parameter/original_shaded_color = Color(0.2627451, 0.58431375, 0.27058825, 1)
+shader_parameter/original_highlight_color = Color(0.6666667, 0.8901961, 0.5764706, 1)
+shader_parameter/original_outline_color = Color(0.24705882, 0.14901961, 0.19215687, 1)
+shader_parameter/new_main_color = Color(0.6431373, 0, 0, 1)
+shader_parameter/new_shaded_color = Color(0.41960785, 0, 0, 1)
+shader_parameter/new_highlight_color = Color(0.9882353, 0, 0, 1)
+shader_parameter/new_outline_color = Color(0.34117648, 0.69803923, 0.9254902, 1)
+shader_parameter/show_outline = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j4u2f"]
+shader = ExtResource("4_j4u2f")
+shader_parameter/original_main_color = Color(0.5176471, 0.7764706, 0.4117647, 1)
+shader_parameter/original_shaded_color = Color(0.2627451, 0.58431375, 0.27058825, 1)
+shader_parameter/original_highlight_color = Color(0.6666667, 0.8901961, 0.5764706, 1)
+shader_parameter/original_outline_color = Color(0.24705882, 0.14901961, 0.19215687, 1)
+shader_parameter/new_main_color = Color(0.6431373, 0, 0, 1)
+shader_parameter/new_shaded_color = Color(0.41960785, 0, 0, 1)
+shader_parameter/new_highlight_color = Color(0.9882353, 0, 0, 1)
+shader_parameter/new_outline_color = Color(0.34117648, 0.69803923, 0.9254902, 1)
+shader_parameter/show_outline = false
 
 [sub_resource type="GDScript" id="GDScript_j4u2f"]
 script/source = "extends Node
@@ -61,21 +84,31 @@ func _on_tile_click( cell:Cell ) -> void:
 script = SubResource("GDScript_6xcje")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=427059887]
-tile_map_data = PackedByteArray(0, 0, 5, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_map_data = PackedByteArray("AAAFAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAGAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAEAP//AAAAAAAAAAAFAP//AAAAAAAAAAAGAP//AAAAAAAAAAAHAAIAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAAAAAAAAAAAAAAHAP//AAAAAAAAAAAIAAIAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAP//AAAAAAAAAAAJAAIAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAAAAAAAAAAAAAAJAP//AAAAAAAAAAAKAAIAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAAAAAAAAAAAAAAKAP//AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_6xcje")
 script = ExtResource("2_7erpr")
 
 [node name="Pawn" parent="." unique_id=1687830141 instance=ExtResource("2_jhmn5")]
 position = Vector2(162, 166)
 
+[node name="Sprite2D" parent="Pawn" index="1" unique_id=1066226246]
+material = SubResource("ShaderMaterial_hmlmf")
+
 [node name="Pawn2" parent="." unique_id=436740835 instance=ExtResource("2_jhmn5")]
 position = Vector2(144, 155)
+
+[node name="Sprite2D" parent="Pawn2" index="1" unique_id=1066226246]
+material = SubResource("ShaderMaterial_j4u2f")
 
 [node name="PawnController" type="Node" parent="." unique_id=180695318]
 script = ExtResource("3_6xcje")
 calculator = ExtResource("4_xepbl")
+default_die = ExtResource("7_hmlmf")
 
 [node name="PlayerControl" type="Node" parent="." unique_id=1693971538 node_paths=PackedStringArray("tile_map", "controller")]
 script = SubResource("GDScript_j4u2f")
 tile_map = NodePath("../TileMapLayer")
 controller = NodePath("../PawnController")
+
+[editable path="Pawn"]
+[editable path="Pawn2"]

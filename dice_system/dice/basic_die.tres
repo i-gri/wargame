@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DiceCore" format=3 uid="uid://4olg7nhbqbxv"]
+
+[ext_resource type="Script" uid="uid://cwh34bv4hsqx2" path="res://dice_system/dice_core.gd" id="1_s3agm"]
+[ext_resource type="Script" uid="uid://0p8bo78tv2v" path="res://dice_system/dice_face.gd" id="2_u5l4b"]
+[ext_resource type="Resource" uid="uid://bykk0varp7sjr" path="res://dice_system/faces/fail.tres" id="3_j6hca"]
+[ext_resource type="Resource" uid="uid://cqwd475efymkd" path="res://dice_system/faces/blank.tres" id="4_pmq6m"]
+[ext_resource type="Resource" uid="uid://bokm0xv4ryfs7" path="res://dice_system/faces/success.tres" id="5_i16qf"]
+[ext_resource type="Resource" uid="uid://eu072edueagb" path="res://dice_system/faces/special.tres" id="6_m25k5"]
+
+[resource]
+script = ExtResource("1_s3agm")
+sides = Array[ExtResource("2_u5l4b")]([ExtResource("3_j6hca"), ExtResource("4_pmq6m"), ExtResource("4_pmq6m"), ExtResource("5_i16qf"), ExtResource("5_i16qf"), ExtResource("6_m25k5")])
+metadata/_custom_type_script = "uid://cwh34bv4hsqx2"

@@ -16,6 +16,7 @@ func _ready() -> void:
 		node.position = map_to_local(tile)
 		node.tile = tile
 		node.input_event.connect(_on_cell_click.bind(node))
+		
 
 		cells[tile] = node
 		add_child(node)
