@@ -3,6 +3,7 @@ class_name Grid extends TileMapLayer
 signal cell_selected(cell: Cell)
 
 const CELL_SCENE_ID: String = "uid://btsk60egvukhj"
+const CELL_OFFSET = Vector2(1,2)
 
 var cells: Dictionary[Vector2i, Cell] = {}
 
@@ -13,7 +14,7 @@ func _ready() -> void:
 	for tile: Vector2i in get_used_cells():
 		var node: Cell = scene.instantiate()
 
-		node.position = map_to_local(tile)
+		node.position = map_to_local(tile) + CELL_OFFSET
 		node.tile = tile
 		node.input_event.connect(_on_cell_click.bind(node))
 		

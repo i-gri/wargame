@@ -5,10 +5,18 @@ class_name PawnController extends Node
 
 
 func move_units( units:Array[Pawn], origin:Cell, destination:Cell ) -> void:
+	print_debug('Here: ', units )
 	if origin == destination: return 
 
 	var direction:Vector2i = get_direction( origin, destination )
 	var new_unit_positions:Array[Vector2] = get_posible_positions( direction, destination )
+
+	if destination.has_player_pawns( null ):
+		var enemy_positions:Array[Vector2] = get_posible_positions( direction * -1, destination )
+
+		for unit:Pawn in destination.get_player_pawns( null ):
+			unit.moved.connect( roll_units_dice.bind( unit ), CONNECT_ONE_SHOT )
+			unit.move_to( enemy_positions.pop_at(randi()%enemy_positions.size()))
 
 	for unit:Pawn in units:
 		unit.moved.connect( roll_units_dice.bind( unit ), CONNECT_ONE_SHOT )
@@ -23,7 +31,7 @@ func get_posible_positions( direction:Vector2i, destination:Cell ) -> Array[Vect
 	var result:Array[Vector2] = []
 
 	for quad:Vector2i in calculator.generate_half_grid( direction ):
-		result.append( calculator.get_section_position( quad ) + destination.position )
+		result.append( calculator.get_section_position_with_offset( quad ) + destination.position )
 
 	return result
 

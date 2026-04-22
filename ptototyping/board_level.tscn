@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://csakj4dhgi3xd" path="res://nodes/pawns/pawn.tscn" id="4_ae16g"]
 [ext_resource type="Resource" uid="uid://bsnoy3wu6pijt" path="res://resources/players/player_one.tres" id="5_sxwi7"]
 [ext_resource type="Script" uid="uid://cr07ppjrh6cy1" path="res://nodes/player_controller/player_controller.gd" id="6_sxwi7"]
+[ext_resource type="Script" uid="uid://c3sco0epggclo" path="res://nodes/pawns/pawn_controller.gd" id="7_hjnhl"]
+[ext_resource type="Resource" uid="uid://cl1ao7tv4m60n" path="res://nodes/board_nodes/resources/4x4-80px40p.tres" id="8_b6rg2"]
+[ext_resource type="Resource" uid="uid://4olg7nhbqbxv" path="res://dice_system/dice/basic_die.tres" id="9_ekfdm"]
 
 [node name="BoardLevel" type="Node2D" unique_id=1090471150]
 
@@ -19,14 +22,21 @@ position = Vector2(162, 156)
 player = ExtResource("5_sxwi7")
 
 [node name="Pawn2" parent="PawnManager" unique_id=708071199 instance=ExtResource("4_ae16g")]
-position = Vector2(281, 114)
+position = Vector2(191, 139)
 facing = -1
 
 [node name="Pawn3" parent="PawnManager" unique_id=73488219 instance=ExtResource("4_ae16g")]
 position = Vector2(192, 160)
 player = ExtResource("5_sxwi7")
 
-[node name="PlayerController" type="Node" parent="." unique_id=1143481134 node_paths=PackedStringArray("grid", "pawn_manager")]
+[node name="PlayerController" type="Node" parent="." unique_id=1143481134 node_paths=PackedStringArray("grid", "pawn_manager", "pawn_controller")]
 script = ExtResource("6_sxwi7")
 grid = NodePath("../TileMapLayer")
 pawn_manager = NodePath("../PawnManager")
+pawn_controller = NodePath("../PawnController")
+player = ExtResource("5_sxwi7")
+
+[node name="PawnController" type="Node" parent="." unique_id=820073136]
+script = ExtResource("7_hjnhl")
+calculator = ExtResource("8_b6rg2")
+default_die = ExtResource("9_ekfdm")
