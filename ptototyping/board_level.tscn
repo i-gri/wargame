@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://kxd7yinl7r52"]
+[gd_scene format=4 uid="uid://kxd7yinl7r52"]
 
 [ext_resource type="PackedScene" uid="uid://dfuj3lrwexbsx" path="res://ptototyping/grid.tscn" id="1_2eofg"]
 [ext_resource type="PackedScene" uid="uid://cdve4tf2oldee" path="res://nodes/pawns/pawn_manager.tscn" id="2_h8c3k"]
@@ -9,24 +9,31 @@
 [ext_resource type="Script" uid="uid://c3sco0epggclo" path="res://nodes/pawns/pawn_controller.gd" id="7_hjnhl"]
 [ext_resource type="Resource" uid="uid://cl1ao7tv4m60n" path="res://nodes/board_nodes/resources/4x4-80px40p.tres" id="8_b6rg2"]
 [ext_resource type="Resource" uid="uid://4olg7nhbqbxv" path="res://dice_system/dice/basic_die.tres" id="9_ekfdm"]
+[ext_resource type="PackedScene" uid="uid://dp3npgqrd1oy3" path="res://nodes/cards/hand.tscn" id="10_b6rg2"]
+[ext_resource type="Script" uid="uid://dtj2wft53l0xl" path="res://nodes/cards/card_controller.gd" id="10_ytyid"]
+[ext_resource type="PackedScene" uid="uid://bq7giso0mp7e2" path="res://nodes/cards/card.tscn" id="11_ekfdm"]
+[ext_resource type="Resource" uid="uid://daunlp3dh448a" path="res://nodes/cards/events_bus.tres" id="11_h7bni"]
+[ext_resource type="Resource" uid="uid://dn7tf8rbdwooo" path="res://resources/cards/first_card.tres" id="14_bdn7j"]
+[ext_resource type="Script" uid="uid://c0mb27vsrunm5" path="res://nodes/managers/plan_controller.gd" id="15_rg5ff"]
 
 [node name="BoardLevel" type="Node2D" unique_id=1090471150]
 
 [node name="TileMapLayer" parent="." unique_id=946590364 instance=ExtResource("1_2eofg")]
+tile_map_data = PackedByteArray("AAAFAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAEAP//AAAAAAAAAAAFAP//AAAAAAAAAAAGAP//AAAAAAAAAAAHAAEAAAAAAAAAAAAHAAAAAAAAAAAAAAAHAP//AAAAAAAAAAAIAAEAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAP//AAAAAAAAAAAJAAEAAAAAAAAAAAAJAAAAAAAAAAAAAAAJAP//AAAAAAAAAAADAP7/AAAAAAAAAAADAP//AAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAAEAP7/AAAAAAAAAAAFAP7/AAAAAAAAAAAGAP7/AAAAAAAAAAAHAP7/AAAAAAAAAAAIAP7/AAAAAAAAAAAJAP7/AAAAAAAAAAA=")
 
 [node name="PawnManager" parent="." unique_id=1229331664 instance=ExtResource("2_h8c3k")]
 script = ExtResource("3_af3hp")
 
 [node name="Pawn" parent="PawnManager" unique_id=1687830141 instance=ExtResource("4_ae16g")]
-position = Vector2(162, 156)
+position = Vector2(151, 120)
 player = ExtResource("5_sxwi7")
 
 [node name="Pawn2" parent="PawnManager" unique_id=708071199 instance=ExtResource("4_ae16g")]
-position = Vector2(191, 139)
+position = Vector2(221, 103)
 facing = -1
 
 [node name="Pawn3" parent="PawnManager" unique_id=73488219 instance=ExtResource("4_ae16g")]
-position = Vector2(192, 160)
+position = Vector2(201, 145)
 player = ExtResource("5_sxwi7")
 
 [node name="PlayerController" type="Node" parent="." unique_id=1143481134 node_paths=PackedStringArray("grid", "pawn_manager", "pawn_controller")]
@@ -40,3 +47,29 @@ player = ExtResource("5_sxwi7")
 script = ExtResource("7_hjnhl")
 calculator = ExtResource("8_b6rg2")
 default_die = ExtResource("9_ekfdm")
+
+[node name="CardController" type="Node" parent="." unique_id=295615407 node_paths=PackedStringArray("hand", "grid")]
+script = ExtResource("10_ytyid")
+hand = NodePath("../Hand")
+grid = NodePath("../TileMapLayer")
+card_events_bus = ExtResource("11_h7bni")
+player = ExtResource("5_sxwi7")
+
+[node name="Hand" parent="." unique_id=311318297 instance=ExtResource("10_b6rg2")]
+position = Vector2(313, 301)
+
+[node name="Card" parent="Hand" unique_id=1390302678 instance=ExtResource("11_ekfdm")]
+core = ExtResource("14_bdn7j")
+
+[node name="Card2" parent="Hand" unique_id=685161290 instance=ExtResource("11_ekfdm")]
+position = Vector2(83, -1)
+core = ExtResource("14_bdn7j")
+
+[node name="Card3" parent="Hand" unique_id=1037457913 instance=ExtResource("11_ekfdm")]
+position = Vector2(-87, 0)
+core = ExtResource("14_bdn7j")
+
+[node name="PlanController" type="Node" parent="." unique_id=2142417261 node_paths=PackedStringArray("card_controller")]
+script = ExtResource("15_rg5ff")
+card_events_bus = ExtResource("11_h7bni")
+card_controller = NodePath("../CardController")

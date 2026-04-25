@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dp3npgqrd1oy3"]
+
+[ext_resource type="Script" uid="uid://dppjwkxog3se" path="res://nodes/cards/hand.gd" id="1_nimwk"]
+[ext_resource type="Resource" uid="uid://daunlp3dh448a" path="res://nodes/cards/events_bus.tres" id="2_c82pu"]
+
+[node name="Hand" type="Node2D" unique_id=311318297]
+script = ExtResource("1_nimwk")
+card_events_bus = ExtResource("2_c82pu")

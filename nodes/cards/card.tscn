@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bq7giso0mp7e2"]
+
+[ext_resource type="Script" uid="uid://crmnw3ldr3xev" path="res://addons/drag_and_drop/scripts/draggable.gd" id="1_1fprh"]
+[ext_resource type="Script" uid="uid://c11g4x2q4uofl" path="res://nodes/cards/card.gd" id="1_njcsl"]
+[ext_resource type="Texture2D" uid="uid://div4kxg0cfg5o" path="res://assets/cards/square-16x16.png" id="1_r8fj6"]
+[ext_resource type="Script" uid="uid://djdmnemxrx7bg" path="res://addons/drag_and_drop/resources/draggable_types/draggable_type.gd" id="2_njcsl"]
+
+[sub_resource type="Resource" id="Resource_y3cwb"]
+script = ExtResource("2_njcsl")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6c3ia"]
+size = Vector2(72, 110)
+
+[sub_resource type="LabelSettings" id="LabelSettings_y3cwb"]
+font_size = 5
+font_color = Color(0.23529412, 0.23529412, 0.39215687, 1)
+
+[node name="Card" type="Area2D" unique_id=1390302678]
+script = ExtResource("1_njcsl")
+
+[node name="Draggable" type="Node" parent="." unique_id=173780641]
+script = ExtResource("1_1fprh")
+drag_input_name = &"select"
+type = SubResource("Resource_y3cwb")
+metadata/_custom_type_script = "uid://crmnw3ldr3xev"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1087536069]
+shape = SubResource("RectangleShape2D_6c3ia")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1186155662]
+position = Vector2(-0.111112595, 0.02173996)
+scale = Vector2(4.486111, 6.872283)
+texture = ExtResource("1_r8fj6")
+
+[node name="Title" type="Label" parent="." unique_id=466377831]
+offset_left = -36.0
+offset_top = -55.0
+offset_right = 36.0
+offset_bottom = -46.0
+theme_override_colors/font_color = Color(0.23529412, 0.12941177, 0.34509805, 1)
+theme_override_font_sizes/font_size = 5
+text = "Title"
+label_settings = SubResource("LabelSettings_y3cwb")
+
+[node name="Text" type="Label" parent="." unique_id=810246025]
+offset_left = -36.0
+offset_top = -15.0
+offset_right = 36.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(0.23529412, 0.12941177, 0.34509805, 1)
+theme_override_font_sizes/font_size = 5
+text = "Text. Lorem ipsum mamore tudore exselsior pasod niopn nwee olkasdmi
+ aoisd
+asodimoasmd oaismd
+"
+label_settings = SubResource("LabelSettings_y3cwb")
+autowrap_mode = 2
+
+[connection signal="drag_ended" from="Draggable" to="." method="_on_drag_ended"]
+[connection signal="drag_started" from="Draggable" to="." method="_on_drag_started"]

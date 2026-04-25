@@ -3,8 +3,15 @@ class_name Cell extends Area2D
 @export var calculator:IsometricCalculator
 @export var debug:bool = false
 
+
+@onready var overlay = $Overlay
+@onready var outline = $Outline
+
+
 var tile:Vector2i
 var sections:Dictionary[Vector2i, Pawn]
+var dropzone:DropZone
+
 
 func _ready() -> void:
 	$DebugLabels.visible = debug
@@ -49,3 +56,14 @@ func _player_owned_pawns( pawn:Pawn, player:Player ) -> bool:
 	if pawn == null: return false
 
 	return pawn.player == player 
+
+
+func _on_mouse_entered() -> void:
+	if dropzone == null: return
+
+	outline.visible = true
+
+func _on_mouse_exited() -> void:
+	if dropzone == null: return
+
+	outline.visible = false

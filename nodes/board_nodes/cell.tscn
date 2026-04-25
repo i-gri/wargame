@@ -1,20 +1,27 @@
 [gd_scene format=3 uid="uid://btsk60egvukhj"]
 
-[ext_resource type="Texture2D" uid="uid://boxqnt3cjfb7m" path="res://assets/map/big-box-with-grid.png" id="1_fmvwa"]
 [ext_resource type="Script" uid="uid://dj6vauc4d673l" path="res://nodes/board_nodes/cell.gd" id="1_naeb7"]
 [ext_resource type="Shape2D" uid="uid://bp84h8fc7ndjd" path="res://nodes/board_nodes/resources/cell_collision_shape.tres" id="2_glslf"]
 [ext_resource type="Resource" uid="uid://cl1ao7tv4m60n" path="res://nodes/board_nodes/resources/4x4-80px40p.tres" id="2_v40vk"]
+[ext_resource type="Texture2D" uid="uid://kvspp8g53dxe" path="res://assets/map/big-tile-full-top.png" id="3_v40vk"]
+[ext_resource type="Texture2D" uid="uid://bw60807y5y3ba" path="res://assets/map/big-tile-outline.png" id="4_mw6u1"]
 
 [node name="Cell" type="Area2D" unique_id=964849692]
 collision_mask = 2
 script = ExtResource("1_naeb7")
 calculator = ExtResource("2_v40vk")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=671964440]
+[node name="Overlay" type="Sprite2D" parent="." unique_id=599430280]
 visible = false
-texture = ExtResource("1_fmvwa")
+modulate = Color(0.627451, 1, 0.46666667, 0.5529412)
+texture = ExtResource("3_v40vk")
+
+[node name="Outline" type="Sprite2D" parent="." unique_id=61187483]
+visible = false
+texture = ExtResource("4_mw6u1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=722488001]
+visible = false
 shape = ExtResource("2_glslf")
 debug_color = Color(0, 0.6, 0.33333334, 0.41960785)
 
@@ -273,3 +280,5 @@ text = "3,0"
 
 [connection signal="area_entered" from="." to="." method="_on_pawn_entered"]
 [connection signal="area_exited" from="." to="." method="_on_pawn_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

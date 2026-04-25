@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="CellFilter" format=3 uid="uid://bmaxdakufpicl"]
+
+[ext_resource type="Script" uid="uid://dkgaxhurd7ilk" path="res://nodes/cards/filters/cell_filter.gd" id="1_pmdei"]
+
+[resource]
+script = ExtResource("1_pmdei")
+metadata/_custom_type_script = "uid://dkgaxhurd7ilk"

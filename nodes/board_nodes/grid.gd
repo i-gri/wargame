@@ -29,6 +29,9 @@ func get_cell_in_position(cell_position: Vector2) -> Cell:
 	return cells.get(tile)
 
 
+func get_all_cells() -> Array[Cell]:
+	return cells.values()
+
 func _on_cell_click(_viewport: Node, event: InputEvent, _shape_ids: int, cell: Cell) -> void:
 	if event is not InputEventMouseButton: return
 
