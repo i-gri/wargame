@@ -1,6 +1,6 @@
 class_name CardController extends Node
 
-signal card_played( card:Card, cell:Cell )
+signal card_played( core:CardCore, cell:Cell )
 
 @export var eligible_cell_color:Color = Color(0.627, 1.0, 0.467, 0.553)
 
@@ -51,4 +51,5 @@ func _on_card_play( target_dropzone: DropZone, card: Card, _plan: DropPlan ) -> 
 	for cell:Cell in eligible_cells:
 		unset_dropzone( cell )
 
-	card_played.emit( card, target_dropzone.get_parent() )
+	card_played.emit( card.core, target_dropzone.get_parent() )
+	hand.card_played( card )

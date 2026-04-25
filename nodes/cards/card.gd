@@ -18,5 +18,5 @@ func filter() -> Callable:
 func _on_drag_started( _area:Area2D ) -> void:
 	scale = Vector2(.3,.3)
 
-func _on_drag_ended(area: Area2D, drop_spot: SnappingSpot) -> void:
+func _on_drag_ended( _area: Area2D, _drop_spot: SnappingSpot) -> void:
 	scale = Vector2(1,1)
